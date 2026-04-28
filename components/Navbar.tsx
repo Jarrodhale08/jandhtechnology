@@ -14,11 +14,11 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { label: "Services", href: "#services" },
-    { label: "Apps", href: "#apps" },
-    { label: "Process", href: "#process" },
-    { label: "About", href: "#about" },
-    { label: "Contact", href: "#contact" },
+    { label: "Services", href: "/#services" },
+    { label: "Apps", href: "/#apps" },
+    { label: "Process", href: "/#process" },
+    { label: "About", href: "/#about" },
+    { label: "Contact", href: "/#contact" },
   ];
 
   return (
@@ -49,7 +49,7 @@ export default function Navbar() {
             </a>
           ))}
           <a
-            href="#contact"
+            href="/#contact"
             className="text-sm px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-medium transition-colors"
           >
             Get in Touch
@@ -86,7 +86,7 @@ export default function Navbar() {
             </a>
           ))}
           <a
-            href="#contact"
+            href="/#contact"
             className="text-sm px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-medium transition-colors text-center"
             onClick={() => setMenuOpen(false)}
           >
