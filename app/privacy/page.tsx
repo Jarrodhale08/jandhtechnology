@@ -154,6 +154,41 @@ export default function PrivacyPage() {
                 explicitly authorize that service to share with us.
               </LegalP>
             </LegalSubSection>
+            <LegalSubSection number="1.6" title="Google API Services (HandyBook Calendar & Drive)">
+              <LegalP>
+                If you connect your Google account in HandyBook, we access only the following Google
+                data, and only to power the features you choose to turn on:
+              </LegalP>
+              <LegalList>
+                <li>
+                  <strong className="text-white">Google Calendar (calendar.events):</strong> to add and
+                  update the events HandyBook creates for your scheduled jobs. We do not read, modify,
+                  or delete your other calendar events, calendars, or settings.
+                </li>
+                <li>
+                  <strong className="text-white">Google Drive (drive.file):</strong> to create and
+                  update only the backup files HandyBook generates — your &ldquo;Handyman Book
+                  Records&rdquo; folder, its spreadsheets, and quote/invoice PDFs. We cannot access any
+                  other files in your Google Drive.
+                </li>
+              </LegalList>
+              <LegalP>
+                HandyBook&rsquo;s use and transfer of information received from Google APIs adheres to
+                the{' '}
+                <a
+                  className="text-indigo-300 hover:text-indigo-200 underline underline-offset-2"
+                  href="https://developers.google.com/terms/api-services-user-data-policy"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Google API Services User Data Policy
+                </a>
+                , including its Limited Use requirements. This Google data is used solely to provide
+                these features; it is never sold or shared for advertising, and is not used to develop,
+                improve, or train generalized or large language AI models. You can revoke access at any
+                time in your Google Account security settings or by disconnecting Google in HandyBook.
+              </LegalP>
+            </LegalSubSection>
           </LegalSection>
 
           <LegalSection id="how-we-use" number="2" title="How We Use Information">
