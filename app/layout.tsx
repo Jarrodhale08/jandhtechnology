@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
+import JsonLd from "@/components/JsonLd";
+import { organizationJsonLd } from "@/lib/slang-jsonld";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -8,6 +10,7 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.jandhtechnology.com"),
   title: "J&H Technology | Mobile App Development",
   description:
     "J&H Technology crafts high-quality iOS and Android mobile applications. We specialize in React Native development, delivering polished apps from concept to App Store.",
@@ -29,6 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geistSans.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-[#050510] text-[#e2e2e2]">
+        <JsonLd data={organizationJsonLd()} />
         {children}
       </body>
     </html>
