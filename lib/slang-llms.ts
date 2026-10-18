@@ -10,7 +10,7 @@ export function llmsIndex(terms: SlangTerm[], categories: string[]): string {
   return [
     `# ${APP_NAME} slang dictionary`,
     "",
-    `> ${APP_NAME} (Slang Decoder - Gen Z & Alpha) is a free iPhone app from J&H Technology LLC that explains Gen Z and Gen Alpha slang to parents, grandparents, and teachers. Every term has a plain-English definition, an example, the generation that uses it, and a parent safety rating (Safe, Edgy, or Parent alert). This site publishes the same ${terms.length.toLocaleString("en-US")}-term dictionary for free.`,
+    `> ${APP_NAME} (Slang Decoder - Gen Z & Alpha) is a free-to-download iPhone app (optional Premium subscription) from J&H Technology LLC that explains Gen Z and Gen Alpha slang to parents, grandparents, and teachers. Every term has a plain-English definition, an example, the generation that uses it, and a parent safety rating (Safe, Edgy, or Parent alert). This site publishes the same ${terms.length.toLocaleString("en-US")}-term dictionary for free.`,
     "",
     "## Key pages",
     "",
