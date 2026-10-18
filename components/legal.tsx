@@ -80,11 +80,11 @@ export function LegalHeader({
       <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">{title}</h1>
       <div className="flex flex-col sm:flex-row gap-x-8 gap-y-1 text-sm text-[#888]">
         <span>
-          <span className="text-[#666]">Last Updated:</span>{" "}
+          <span className="text-[#8a8a94]">Last Updated:</span>{" "}
           <span className="text-[#c8c8d0]">{lastUpdated}</span>
         </span>
         <span>
-          <span className="text-[#666]">Effective Date:</span>{" "}
+          <span className="text-[#8a8a94]">Effective Date:</span>{" "}
           <span className="text-[#c8c8d0]">{effectiveDate}</span>
         </span>
       </div>

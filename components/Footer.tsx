@@ -52,7 +52,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-white/[0.04] text-center text-sm text-[#555]">
+        <div className="mt-8 pt-8 border-t border-white/[0.04] text-center text-sm text-[#8a8a94]">
           Copyright &copy; {new Date().getFullYear()} J&H Technology LLC — All Rights Reserved
         </div>
       </div>
