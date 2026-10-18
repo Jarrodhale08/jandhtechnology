@@ -97,9 +97,10 @@ export default function CoffeeTastingPrivacyPage() {
             </LegalList>
             <LegalP>
               The app attaches no account or user identifier to reports and tells Sentry not to
-              send its default personal data. We configure our crash reporting provider not to
-              store IP addresses. We use crash reports only to find and
-              fix bugs, and we do not use them to identify you or your device. Reports are kept for
+              send its default personal data. As with any internet request, Sentry receives the IP
+              address the report was sent from and may store it with the report. We use crash
+              reports only to find and fix bugs, and we do not use them to identify you or your
+              device. Reports are kept for
               the retention period set in our Sentry organization, and then deleted.
             </LegalP>
           </LegalSection>
