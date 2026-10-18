@@ -20,6 +20,10 @@ function types(nodes: Record<string, unknown>[]): string[] {
   return nodes.map((n) => String(n["@type"]));
 }
 
+if (process.env.VERCEL_OIDC_TOKEN && !BASE.startsWith("http://localhost")) {
+  test.use({ extraHTTPHeaders: { "x-vercel-trusted-oidc-idp-token": process.env.VERCEL_OIDC_TOKEN } });
+}
+
 test.describe("slang dictionary", () => {
   test("index renders the full A–Z list with valid JSON-LD", async ({ page }) => {
     await page.goto(`${BASE}/slang`);
