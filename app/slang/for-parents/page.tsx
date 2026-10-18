@@ -8,7 +8,6 @@ import {
   SlangSubnav,
   TermList,
 } from "@/components/slang/ui";
-import type { DangerCategory } from "@/lib/slang-core";
 import { APP_NAME, SITE_URL, getAllTerms } from "@/lib/slang";
 import { breadcrumbJsonLd, mobileApplicationJsonLd, SLANG_INDEX_URL } from "@/lib/slang-jsonld";
 import { slangMetadata } from "@/lib/slang-metadata";
@@ -18,33 +17,9 @@ export const revalidate = 86400;
 export const metadata = slangMetadata({
   title: `Slang Every Parent Should Know: Safety Guide | ${APP_NAME}`,
   description:
-    "The Gen Z and Gen Alpha slang parents should know for safety, including coded terms for self-harm, drugs, and grooming, plus how to talk with your kid about it.",
+    "Which Gen Z and Gen Alpha slang terms carry a parent alert, how our safety ratings work, and how to talk with your kid about slang. Meanings are in Slang Decoder.",
   path: "/slang/for-parents",
 });
-
-const DANGER_SECTIONS: { key: DangerCategory; title: string; intro: string }[] = [
-  {
-    key: "self-harm",
-    title: "Self-harm and suicide",
-    intro:
-      "Some of these are used as dark jokes, but any of them can be a real signal. If you are worried about your child, in the US you can call or text 988 to reach the Suicide & Crisis Lifeline at any time.",
-  },
-  {
-    key: "predatory",
-    title: "Grooming and unsafe contact",
-    intro: "Terms that can appear when someone is trying to move a child into private or in-person contact.",
-  },
-  {
-    key: "drugs",
-    title: "Drugs and coded emoji",
-    intro: "Words and emoji that can be used as code for drugs. Several also have innocent meanings, so context matters.",
-  },
-  {
-    key: "sexual",
-    title: "Sexual slang and emoji",
-    intro: "Terms with a sexual meaning that younger kids often repeat from videos without understanding them.",
-  },
-];
 
 const TALK_TIPS = [
   {
@@ -73,7 +48,6 @@ export default async function ForParentsPage() {
   const all = await getAllTerms();
   const flagged = all.filter((t) => t.safety === "inappropriate");
   const edgy = all.filter((t) => t.safety === "edgy");
-  const otherFlagged = flagged.filter((t) => !t.danger);
 
   return (
     <>
@@ -115,34 +89,24 @@ export default async function ForParentsPage() {
           <div className="rounded-xl bg-rose-500/5 border border-rose-500/20 p-4">
             <dt className="font-semibold text-rose-300 mb-1">Parent alert</dt>
             <dd className="text-sm text-[#c8c8d0]">
-              Relates to self-harm, drugs, sex, or grooming. We do not show example sentences for these.
+              Can relate to self-harm, drugs, sexual content, or grooming. Worth a direct conversation.
             </dd>
           </div>
         </dl>
       </section>
 
-      {DANGER_SECTIONS.map(({ key, title, intro }) => {
-        const terms = flagged.filter((t) => t.danger === key);
-        if (terms.length === 0) return null;
-        return (
-          <section key={key} aria-labelledby={`${key}-heading`} className="mb-12">
-            <h2 id={`${key}-heading`} className="text-2xl font-semibold text-white mb-2">
-              {title}
-            </h2>
-            <p className="text-[#c8c8d0] leading-relaxed mb-4">{intro}</p>
-            <TermList terms={terms} showBadges={false} />
-          </section>
-        );
-      })}
-
-      {otherFlagged.length > 0 && (
-        <section aria-labelledby="other-flagged-heading" className="mb-12">
-          <h2 id="other-flagged-heading" className="text-2xl font-semibold text-white mb-4">
-            Other terms with a parent alert
-          </h2>
-          <TermList terms={otherFlagged} showBadges={false} />
-        </section>
-      )}
+      <section aria-labelledby="alert-heading" className="mb-12">
+        <h2 id="alert-heading" className="text-2xl font-semibold text-white mb-2">
+          Terms with a parent alert
+        </h2>
+        <p className="text-[#d4d4dc] leading-relaxed mb-4">
+          These terms can relate to self-harm, drugs, sexual content, or unsafe contact online. Some
+          also have innocent uses, so context matters. If you are ever worried that your child may
+          hurt themselves, in the US you can call or text 988 to reach the 988 Suicide &amp; Crisis
+          Lifeline at any time. The meaning of each term and a note for parents are in {APP_NAME}.
+        </p>
+        <TermList terms={flagged} showBadges={false} />
+      </section>
 
       <section aria-labelledby="edgy-heading" className="mb-12">
         <h2 id="edgy-heading" className="text-2xl font-semibold text-white mb-2">

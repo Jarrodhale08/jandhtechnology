@@ -1,39 +1,32 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
-  answerSentence,
   assignUniqueSlugs,
-  badWordAnswer,
   cleanText,
-  definitionAfterLead,
   displayTerm,
+  generationAnswer,
   groupByLetter,
   letterAnchor,
+  meaningAnswer,
   normalizeRows,
-  parentNote,
+  pageUpdated,
+  PAGES_REVISED_AT,
   relatedTerms,
-  shouldShowExample,
+  safetyAnswer,
   slugify,
-  truncate,
   type SlangRow,
 } from "../lib/slang-core";
 
 function row(overrides: Partial<SlangRow>): SlangRow {
   return {
     term: "Rizz",
-    definition: "Natural charm. Used about flirting.",
-    example: "His rizz is unmatched.",
     category: "tiktok",
     generation: "gen-z",
     safety_level: "safe",
-    context: null,
-    generational_equivalents: { genZ: "Rizz", boomer: "Charm", unknown: "x" },
-    pronunciation: "RIZ",
     trending: true,
     usage_count: 3,
     created_at: "2026-02-26T00:00:00Z",
     updated_at: "2026-03-01T00:00:00Z",
-    danger_category: null,
     ...overrides,
   };
 }
@@ -64,56 +57,6 @@ test("cleanText collapses doubled quotes and whitespace, nulls empties", () => {
   assert.equal(cleanText(null), null);
 });
 
-test("normalizeRows sorts, drops unusable rows and maps enums safely", () => {
-  const terms = normalizeRows([
-    row({ term: "Zesty", safety_level: "weird", generation: null, category: null }),
-    row({ term: "", definition: "x" }),
-    row({ term: "Ate", danger_category: "drugs", safety_level: "inappropriate" }),
-  ]);
-  assert.deepEqual(terms.map((t) => t.term), ["Ate", "Zesty"]);
-  assert.equal(terms[1].safety, "safe");
-  assert.equal(terms[1].generation, "both");
-  assert.equal(terms[1].category, "general");
-  assert.equal(terms[0].danger, "drugs");
-  assert.deepEqual(terms[0].equivalents, [
-    { label: "Gen Z", value: "Rizz" },
-    { label: "Boomer", value: "Charm" },
-  ]);
-});
-
-test("answerSentence leads with the term and the first sentence", () => {
-  const [rizz] = normalizeRows([row({})]);
-  assert.equal(answerSentence(rizz), "Rizz means natural charm.");
-  assert.equal(definitionAfterLead(rizz), "Used about flirting.");
-  const [kys] = normalizeRows([row({ term: "KYS", definition: "Stands for 'Kill Yourself'" })]);
-  assert.equal(answerSentence(kys), "KYS stands for 'Kill Yourself'.");
-  const [percs] = normalizeRows([row({ term: "Percs", definition: "Short for Percocet." })]);
-  assert.equal(answerSentence(percs), "Percs is short for Percocet.");
-  const [sh] = normalizeRows([row({ term: "SH", definition: "Abbreviation for Self-Harm." })]);
-  assert.equal(answerSentence(sh), "SH is an abbreviation for Self-Harm.");
-  const [lol] = normalizeRows([row({ term: "LOL", definition: "LOUD laughter" })]);
-  assert.equal(answerSentence(lol), "LOL means LOUD laughter.");
-});
-
-test("inappropriate terms hide examples and carry danger-specific notes", () => {
-  const [safe, edgy, alert, generic] = normalizeRows([
-    row({ term: "A" }),
-    row({ term: "B", safety_level: "edgy" }),
-    row({ term: "C", safety_level: "inappropriate", danger_category: "self-harm" }),
-    row({ term: "D", safety_level: "inappropriate" }),
-  ]);
-  assert.equal(shouldShowExample(safe), true);
-  assert.equal(shouldShowExample(edgy), true);
-  assert.equal(shouldShowExample(alert), false);
-  assert.match(parentNote(alert), /988/);
-  assert.match(parentNote(generic), /flagged as inappropriate/);
-  assert.match(badWordAnswer(safe), /^No\./);
-  assert.match(badWordAnswer(edgy), /^Not exactly/);
-  assert.match(badWordAnswer(alert), /^It can be\./);
-  const [noExample] = normalizeRows([row({ example: null })]);
-  assert.equal(shouldShowExample(noExample), false);
-});
-
 test("groupByLetter puts non-letters first under #", () => {
   const groups = groupByLetter(normalizeRows([row({ term: "bet" }), row({ term: "67" }), row({ term: "Aura" })]));
   assert.deepEqual(groups.map((g) => g.letter), ["#", "A", "B"]);
@@ -138,9 +81,57 @@ test("displayTerm lowercases plain capitalised words only", () => {
   assert.equal(displayTerm("iPad Kid"), "iPad Kid");
 });
 
-test("truncate respects the limit and word boundaries", () => {
-  assert.equal(truncate("short", 10), "short");
-  const out = truncate("one two three four five six", 12);
-  assert.ok(out.length <= 12);
-  assert.ok(out.endsWith("…"));
+test("normalizeRows sorts, drops blank terms and maps enums safely", () => {
+  const terms = normalizeRows([
+    row({ term: "Zesty", safety_level: "weird", generation: null, category: null, trending: null }),
+    row({ term: "   " }),
+    row({ term: "Ate", safety_level: "inappropriate", generation: "gen-alpha" }),
+  ]);
+  assert.deepEqual(terms.map((t) => t.term), ["Ate", "Zesty"]);
+  assert.equal(terms[1].safety, "safe");
+  assert.equal(terms[1].generation, "both");
+  assert.equal(terms[1].category, "general");
+  assert.equal(terms[1].trending, false);
+  assert.equal(terms[0].safety, "inappropriate");
+  assert.equal(terms[0].generation, "gen-alpha");
+});
+
+test("normalized terms carry no meaning fields at all", () => {
+  const [t] = normalizeRows([
+    { ...row({}), definition: "SECRET MEANING", example: "SECRET EXAMPLE", context: "SECRET ORIGIN" } as SlangRow,
+  ]);
+  assert.deepEqual(Object.keys(t).sort(), [
+    "category",
+    "createdAt",
+    "generation",
+    "safety",
+    "slug",
+    "term",
+    "trending",
+    "updatedAt",
+    "usageCount",
+  ]);
+  assert.ok(!JSON.stringify(t).includes("SECRET"));
+});
+
+test("FAQ answers come from the rating label and generation only", () => {
+  const [safe, edgy, alert, both] = normalizeRows([
+    row({ term: "A" }),
+    row({ term: "B", safety_level: "edgy", generation: "gen-alpha" }),
+    row({ term: "C", safety_level: "inappropriate" }),
+    row({ term: "D", generation: "both" }),
+  ]);
+  assert.equal(safetyAnswer(safe), "Slang Decoder rates A as Safe, meaning it is everyday slang that is not rude or explicit.");
+  assert.match(safetyAnswer(edgy), /rates B as Edgy, meaning it is not explicit/);
+  assert.match(safetyAnswer(alert), /rates C as Parent alert, meaning it is flagged for parents/);
+  assert.equal(generationAnswer(safe), "A is mostly used by Gen Z.");
+  assert.equal(generationAnswer(edgy), "B is mostly used by Gen Alpha.");
+  assert.equal(generationAnswer(both), "D is used by both Gen Z and Gen Alpha.");
+  assert.match(meaningAnswer(safe), /^The meaning of A, with a real example and a parent note, is in the Slang Decoder app/);
+  assert.match(meaningAnswer(safe), /optional Premium subscription/);
+});
+
+test("pageUpdated never reports a date before the no-definition rebuild", () => {
+  assert.equal(pageUpdated("2026-03-01T00:00:00Z"), PAGES_REVISED_AT);
+  assert.equal(pageUpdated("2027-01-01T00:00:00.000Z"), "2027-01-01T00:00:00.000Z");
 });

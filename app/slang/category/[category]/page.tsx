@@ -24,8 +24,8 @@ export async function generateMetadata({ params }: PageProps<"/slang/category/[c
   if (!terms) return {};
   const label = categoryLabel(category);
   return slangMetadata({
-    title: `${label} Slang Meanings: ${terms.length} Terms Explained | ${APP_NAME}`,
-    description: `What ${label.toLowerCase()} slang means, explained for parents: ${terms.length} Gen Z and Gen Alpha ${label} terms with definitions, examples, and safety ratings.`,
+    title: `${label} Slang: ${terms.length} Gen Z & Gen Alpha Terms | ${APP_NAME}`,
+    description: `${terms.length} Gen Z and Gen Alpha ${label} slang terms with the generation and a parent safety rating for each. Get every meaning in the ${APP_NAME} iPhone app.`,
     path: `/slang/category/${category}`,
   });
 }
@@ -48,10 +48,10 @@ export default async function SlangCategoryPage({ params }: PageProps<"/slang/ca
       <Breadcrumbs
         items={[{ name: "Home", href: "/" }, { name: "Slang dictionary", href: "/slang" }, { name: `${label} slang` }]}
       />
-      <SlangHeader eyebrow="Slang by category" title={`${label} slang meanings`}>
+      <SlangHeader eyebrow="Slang by category" title={`${label} slang`}>
         <p className="text-lg text-[#c8c8d0] leading-relaxed max-w-3xl">
-          {terms.length} {label} slang terms used by Gen Z and Gen Alpha, each with a plain-English
-          definition and a parent safety rating.
+          {terms.length} {label} slang terms used by Gen Z and Gen Alpha, each with its generation and
+          a parent safety rating. Open any term to see how to look up its meaning in {APP_NAME}.
         </p>
       </SlangHeader>
       <SlangSubnav />

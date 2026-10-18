@@ -9,7 +9,7 @@ export const revalidate = 86400;
 export const metadata = slangMetadata({
   title: `Gen Alpha Slang Dictionary: What Kids Are Saying | ${APP_NAME}`,
   description:
-    "Gen Alpha slang explained for parents and teachers: skibidi, sigma, Ohio, fanum tax and hundreds more, with definitions, examples, and a safety rating for each term.",
+    "Gen Alpha slang for parents and teachers: skibidi, sigma, Ohio, fanum tax and hundreds more, each with a safety rating. Meanings are in the Slang Decoder app.",
   path: "/slang/gen-alpha",
 });
 

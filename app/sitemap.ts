@@ -1,12 +1,12 @@
 import type { MetadataRoute } from "next";
-import { latestUpdate } from "@/lib/slang-core";
+import { latestUpdate, pageUpdated } from "@/lib/slang-core";
 import { SITE_URL, getAllTerms, getCategories, termUrl } from "@/lib/slang";
 
 export const revalidate = 86400;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [terms, categories] = await Promise.all([getAllTerms(), getCategories()]);
-  const dictionaryUpdated = new Date(latestUpdate(terms));
+  const dictionaryUpdated = new Date(pageUpdated(latestUpdate(terms)));
   const staticPages: MetadataRoute.Sitemap = [
     { url: `${SITE_URL}/`, changeFrequency: "monthly", priority: 1 },
     { url: `${SITE_URL}/privacy`, changeFrequency: "yearly", priority: 0.3 },
@@ -23,13 +23,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
   const categoryPages: MetadataRoute.Sitemap = categories.map(({ category }) => ({
     url: `${SITE_URL}/slang/category/${category}`,
-    lastModified: new Date(latestUpdate(terms.filter((t) => t.category === category))),
+    lastModified: new Date(pageUpdated(latestUpdate(terms.filter((t) => t.category === category)))),
     changeFrequency: "weekly",
     priority: 0.6,
   }));
   const termPages: MetadataRoute.Sitemap = terms.map((t) => ({
     url: termUrl(t.slug),
-    lastModified: new Date(t.updatedAt),
+    lastModified: new Date(pageUpdated(t.updatedAt)),
     changeFrequency: "monthly",
     priority: 0.7,
   }));
