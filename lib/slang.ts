@@ -8,27 +8,15 @@ export const APP_NAME = "Slang Decoder";
 export const SLANG_REVALIDATE_SECONDS = 86400;
 
 const PAGE_SIZE = 1000;
-const COLUMNS = [
-  "term",
-  "definition",
-  "example",
-  "category",
-  "generation",
-  "safety_level",
-  "context",
-  "generational_equivalents",
-  "pronunciation",
-  "trending",
-  "usage_count",
-  "created_at",
-  "updated_at",
-  "danger_category",
-].join(",");
+// Definitions, examples, origin text and equivalents are deliberately never fetched: the site
+// must not be able to leak them. Meanings live only in the Slang Decoder app.
+const COLUMNS = ["term", "category", "generation", "safety_level", "trending", "usage_count", "created_at", "updated_at"].join(",");
 
 async function fetchPage(baseUrl: string, key: string, offset: number): Promise<SlangRow[]> {
   const params = new URLSearchParams({
     select: COLUMNS,
     app_id: "eq.slang_to_english",
+    definition: "not.is.null",
     order: "term.asc",
     limit: String(PAGE_SIZE),
     offset: String(offset),

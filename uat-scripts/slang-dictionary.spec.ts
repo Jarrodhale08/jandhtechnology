@@ -64,42 +64,71 @@ test.describe("slang dictionary", () => {
     expect(await page.locator("#slang-az [data-slang-term]:visible").count()).toBeGreaterThan(1000);
   });
 
-  test("term page: answer-first h1, JSON-LD, CTA and metadata", async ({ page }) => {
+  test("term page: teaser only, JSON-LD, App Store CTA and metadata", async ({ page }) => {
     await page.goto(`${BASE}/slang/rizz`);
     await expect(page.locator("h1")).toHaveCount(1);
     await expect(page.locator("h1")).toHaveText("What does Rizz mean?");
-    await expect(page.getByText(/^Rizz means /)).toBeVisible();
-    await expect(page).toHaveTitle("What does rizz mean? Gen Z slang definition | Slang Decoder");
+    await expect(page).toHaveTitle("What does rizz mean? Gen Z slang | Slang Decoder");
     const nodes = await jsonLd(page);
     expect(types(nodes)).toEqual(expect.arrayContaining(["DefinedTerm", "FAQPage", "BreadcrumbList", "Organization"]));
     const faq = nodes.find((n) => n["@type"] === "FAQPage")!;
     const questions = (faq.mainEntity as { name: string }[]).map((q) => q.name);
-    expect(questions).toEqual(["What does Rizz mean?", "Is Rizz a bad word?"]);
+    expect(questions).toEqual([
+      "Is Rizz safe for kids?",
+      "Which generation uses Rizz?",
+      "Where can I find the meaning of Rizz?",
+    ]);
     await expect(page.locator('meta[name="apple-itunes-app"]')).toHaveAttribute("content", "app-id=6759603354");
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", "https://www.jandhtechnology.com/slang/rizz");
-    await expect(page.locator('meta[property="og:title"]')).toHaveAttribute("content", /rizz/);
     await expect(page.locator('meta[name="twitter:card"]')).toHaveCount(1);
-    await expect(page.getByRole("link", { name: /Download Slang Decoder on the App Store/ })).toHaveAttribute(
-      "href",
-      "https://apps.apple.com/app/id6759603354",
-    );
+    await expect(page.getByRole("heading", { name: "See what “Rizz” means in Slang Decoder" })).toBeVisible();
+    const badge = page.getByRole("link", { name: "Download Slang Decoder on the App Store" }).first();
+    await expect(badge).toHaveAttribute("href", "https://apps.apple.com/app/id6759603354");
+    await expect(badge.locator("img")).toHaveAttribute("alt", "Download Slang Decoder on the App Store");
     await expect(page.getByText(/Last updated/)).toBeVisible();
-    await expect(page.locator("dl dt", { hasText: "Parent safety rating" })).toBeVisible();
+    await expect(page.locator("dt", { hasText: "Parent safety rating" })).toBeVisible();
     await expect(page.getByRole("heading", { name: /Related .* slang/ })).toBeVisible();
   });
 
-  test("inappropriate term withholds the example and shows a parent note", async ({ page }) => {
+  test("no definition, example, or origin text on term pages, metadata or JSON-LD", async ({ page, request }) => {
+    const url = process.env.SLANG_SUPABASE_URL;
+    const key = process.env.SLANG_SUPABASE_ANON_KEY;
+    test.skip(!url || !key, "Supabase env not loaded");
+    for (const slug of ["rizz", "kys", "skibidi", "gyatt"]) {
+      const res = await request.get(`${BASE}/slang/${slug}`);
+      expect(res.status(), slug).toBe(200);
+      const html = await res.text();
+      const termName = (await (async () => {
+        await page.goto(`${BASE}/slang/${slug}`);
+        return (await page.locator("h1").innerText()).replace(/^What does (.+) mean\?$/, "$1");
+      })());
+      const params = new URLSearchParams({ select: "definition,example,context", term: `eq.${termName}`, app_id: "eq.slang_to_english" });
+      const rows: { definition: string; example: string | null; context: string | null }[] = await (
+        await request.get(`${url}/rest/v1/slang_terms?${params}`, { headers: { apikey: key!, Authorization: `Bearer ${key}` } })
+      ).json();
+      expect(rows.length, slug).toBeGreaterThan(0);
+      const rendered = await page.content();
+      for (const text of [rows[0].definition, rows[0].example, rows[0].context]) {
+        if (!text) continue;
+        const sample = text.replace(/\s+/g, " ").trim().slice(0, 30);
+        expect(html, `${slug} raw HTML`).not.toContain(sample);
+        expect(rendered, `${slug} DOM`).not.toContain(sample);
+      }
+    }
+  });
+
+  test("parent-alert term shows its rating and the app CTA, never a meaning", async ({ page }) => {
     await page.goto(`${BASE}/slang/kys`);
-    await expect(page.getByText(/Example withheld/)).toBeVisible();
-    await expect(page.getByText(/988/).first()).toBeVisible();
-    await expect(page.getByText("Parent alert").first()).toBeVisible();
+    await expect(page.locator("header dd").getByText("Parent alert", { exact: true })).toBeVisible();
+    await expect(page.getByText(/rates KYS as Parent alert/).first()).toBeVisible();
+    await expect(page.getByRole("link", { name: "Download Slang Decoder on the App Store" }).first()).toBeVisible();
   });
 
   test("hub pages render", async ({ page }) => {
     for (const [path, h1] of [
       ["/slang/gen-alpha", "Gen Alpha slang dictionary"],
       ["/slang/for-parents", "Slang every parent should know"],
-      ["/slang/category/gaming", "Gaming slang meanings"],
+      ["/slang/category/gaming", "Gaming slang"],
     ]) {
       const res = await page.goto(`${BASE}${path}`);
       expect(res?.status()).toBe(200);
@@ -144,7 +173,7 @@ test.describe("slang dictionary", () => {
     const full = await request.get(`${BASE}/llms-full.txt`);
     expect(full.status()).toBe(200);
     const fullText = await full.text();
-    expect(fullText).toMatch(/^- Rizz — .+ — Gen Z — https:\/\/www\.jandhtechnology\.com\/slang\/rizz$/m);
+    expect(fullText).toMatch(/^- Rizz \| Gen Z \| Safe \| TikTok \| https:\/\/www\.jandhtechnology\.com\/slang\/rizz$/m);
     expect(fullText.split("\n").filter((l) => l.startsWith("- ")).length).toBeGreaterThan(1000);
   });
 

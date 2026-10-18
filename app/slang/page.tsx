@@ -4,14 +4,14 @@ import SlangSearch from "@/components/slang/SlangSearch";
 import {
   AppStoreCta,
   Breadcrumbs,
-  CompactTermList,
   SLANG_LINK,
   SlangHeader,
   SlangSubnav,
   TermList,
+  TermNameList,
 } from "@/components/slang/ui";
-import { categoryLabel, formatDate, groupByLetter, latestUpdate, letterAnchor } from "@/lib/slang-core";
-import { APP_NAME, getAllTerms, getCategories } from "@/lib/slang";
+import { categoryLabel, formatDate, groupByLetter, latestUpdate, letterAnchor, pageUpdated } from "@/lib/slang-core";
+import { APP_NAME, APP_STORE_URL, getAllTerms, getCategories } from "@/lib/slang";
 import { breadcrumbJsonLd, definedTermSetJsonLd, mobileApplicationJsonLd, SLANG_INDEX_URL } from "@/lib/slang-jsonld";
 import { slangMetadata } from "@/lib/slang-metadata";
 
@@ -20,7 +20,7 @@ export const revalidate = 86400;
 export const metadata = slangMetadata({
   title: `Gen Z & Gen Alpha Slang Dictionary A–Z | ${APP_NAME}`,
   description:
-    "What does rizz, skibidi, or gyatt mean? Look up 1,000+ Gen Z and Gen Alpha slang terms with plain-English definitions, examples, and a parent safety rating.",
+    "Browse 1,000+ Gen Z and Gen Alpha slang terms with the generation and a parent safety rating for each. Get every meaning in the Slang Decoder iPhone app.",
   path: "/slang",
 });
 
@@ -32,7 +32,7 @@ export default async function SlangIndexPage() {
     .sort((a, b) => b.usageCount - a.usageCount || a.term.localeCompare(b.term))
     .slice(0, 12);
   const newest = [...terms].sort((a, b) => b.createdAt.localeCompare(a.createdAt)).slice(0, 12);
-  const updated = latestUpdate(terms);
+  const updated = pageUpdated(latestUpdate(terms));
 
   return (
     <>
@@ -46,12 +46,12 @@ export default async function SlangIndexPage() {
       <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Slang dictionary" }]} />
       <SlangHeader eyebrow={`${APP_NAME} · Slang dictionary`} title="Gen Z & Gen Alpha Slang Dictionary">
         <p className="text-lg text-[#c8c8d0] leading-relaxed max-w-3xl">
-          Plain-English definitions for {terms.length.toLocaleString("en-US")} slang terms your kids,
-          students, or coworkers are using, each with a real example, the generation that uses it,
-          and a parent safety rating. Built by the team behind the{" "}
-          <Link href="#app-cta-heading" className={SLANG_LINK}>
+          An index of {terms.length.toLocaleString("en-US")} slang terms your kids, students, or
+          coworkers are using, with the generation that uses each one and a parent safety rating.
+          The meaning and a real example for every term are in the{" "}
+          <a href={APP_STORE_URL} className={SLANG_LINK} rel="noopener noreferrer">
             {APP_NAME} iPhone app
-          </Link>
+          </a>
           .
         </p>
         <p className="mt-4 text-sm text-[#ababab]">
@@ -128,7 +128,7 @@ export default async function SlangIndexPage() {
               >
                 {letter === "#" ? "# Numbers & emoji" : letter}
               </h3>
-              <CompactTermList terms={letterTerms} />
+              <TermNameList terms={letterTerms} />
             </section>
           ))}
         </div>
