@@ -34,7 +34,7 @@ export function LegalSubSection({
   return (
     <div className="space-y-3">
       <h3 className="text-base md:text-lg font-semibold text-white">
-        <span className="text-indigo-400/70 mr-2 font-mono">{number}</span>
+        <span className="text-indigo-400 mr-2 font-mono">{number}</span>
         {title}
       </h3>
       <div className="space-y-3 text-[#c8c8d0] leading-relaxed">{children}</div>

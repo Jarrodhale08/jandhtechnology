@@ -89,7 +89,8 @@ export default function CoffeeTastingTermsPage() {
 
           <LegalSection id="retailer-links" number="4" title="Retailer links are third-party">
             <LegalP>
-              Links to coffee retailers open third-party websites that we do not own or control. We
+              The app&rsquo;s &ldquo;Buy this coffee&rdquo; links show the retailer&rsquo;s web address and
+              open it in your browser. These are third-party websites that we do not own or control. We
               take no payment from these links and are not responsible for the retailers&rsquo;
               products, prices, content, or policies. Any purchase is between you and the retailer.
             </LegalP>

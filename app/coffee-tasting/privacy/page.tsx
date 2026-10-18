@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { LegalHeader, LegalSection, LegalList, LegalP } from "@/components/legal";
+import { LegalHeader, LegalSection, LegalSubSection, LegalList, LegalP } from "@/components/legal";
 
 const LAST_UPDATED = "October 18, 2026";
 const EFFECTIVE_DATE = "October 18, 2026";
@@ -46,9 +46,9 @@ export default function CoffeeTastingPrivacyPage() {
 
           <LegalSection id="summary" number="1" title="Summary">
             <LegalP>
-              Coffee Tasting is a notebook for your coffee tastings. Your tastings stay on your
-              phone. We have no accounts, no ads, and no tracking. The only data that can leave
-              your device is a crash report, and only if you switch that on.
+              Coffee Tasting is a notebook for your coffee tastings. Your tastings never leave your
+              phone. We have no accounts, no ads, and no tracking. The app checks for app updates
+              when it opens, and sends crash reports only if you switch that on.
             </LegalP>
           </LegalSection>
 
@@ -67,6 +67,15 @@ export default function CoffeeTastingPrivacyPage() {
               iCloud or a computer, your operating system may include the app&rsquo;s data in that
               backup under your own backup settings.
             </LegalP>
+            <LegalSubSection number="2.1" title="App update checks">
+              <LegalP>
+                When the app opens, it checks Expo&rsquo;s update service (expo.dev) for app
+                updates. That request includes the app version, your platform (iOS or Android), and
+                runtime and update identifiers, and, as with any internet request, your IP address
+                reaches Expo&rsquo;s servers. It contains no tasting data and no account or user
+                identifier, because the app has none.
+              </LegalP>
+            </LegalSubSection>
           </LegalSection>
 
           <LegalSection id="crash-reports" number="3" title="Crash reports">
@@ -77,17 +86,19 @@ export default function CoffeeTastingPrivacyPage() {
             </LegalP>
             <LegalP>
               When it is on, a crash report is sent to Sentry, our crash-reporting service. A
-              report contains technical details such as the error, the app version, and the
-              operating system version.
+              report contains technical details: the error and its stack trace, the app version,
+              the operating system version, and the device model. Sentry also receives anonymous
+              session start and end data, which shows how many sessions ended in a crash.
             </LegalP>
             <LegalP>A crash report never contains:</LegalP>
             <LegalList>
               <li>your tasting notes or any other text you typed</li>
-              <li>your name, email address, or any user identifier</li>
-              <li>your device name</li>
+              <li>an account, name, or email address, because the app has none</li>
             </LegalList>
             <LegalP>
-              We configure Sentry not to store IP addresses. We use crash reports only to find and
+              The app attaches no account or user identifier to reports and tells Sentry not to
+              send its default personal data. We configure our crash reporting provider not to
+              store IP addresses. We use crash reports only to find and
               fix bugs, and we do not use them to identify you or your device. Reports are kept for
               the retention period set in our Sentry organization, and then deleted.
             </LegalP>
@@ -98,15 +109,15 @@ export default function CoffeeTastingPrivacyPage() {
               <li>No advertising.</li>
               <li>No tracking across apps or websites.</li>
               <li>No analytics or usage statistics.</li>
-              <li>We do not sell or share your data, because we do not have it.</li>
+              <li>We do not sell or share your data. Your tastings never reach us.</li>
             </LegalList>
           </LegalSection>
 
           <LegalSection id="retailer-links" number="5" title="Links to coffee retailers">
             <LegalP>
-              Some coffees in the app link to the website of a retailer that sells them. These
-              links open in your browser, are marked as external, and are only ever followed when
-              you tap them. We add no tracking to them and take no payment. Once you leave the
+              Some coffees in the app link to the website of a retailer that sells them. The
+              app shows a &ldquo;Buy this coffee&rdquo; link with the retailer&rsquo;s web address.
+              It opens in your browser only when you tap it. We add no tracking to them and take no payment. Once you leave the
               app, the retailer&rsquo;s own privacy policy applies.
             </LegalP>
           </LegalSection>
