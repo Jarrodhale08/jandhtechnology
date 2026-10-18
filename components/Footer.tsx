@@ -31,6 +31,9 @@ export default function Footer() {
             <Link href="/#contact" className="hover:text-white transition-colors">
               Contact
             </Link>
+            <Link href="/slang" className="hover:text-white transition-colors">
+              Slang Dictionary
+            </Link>
             <span aria-hidden="true" className="hidden md:inline text-white/10">
               |
             </span>

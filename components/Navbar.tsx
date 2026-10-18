@@ -18,6 +18,7 @@ export default function Navbar() {
     { label: "Apps", href: "/#apps" },
     { label: "Process", href: "/#process" },
     { label: "About", href: "/#about" },
+    { label: "Slang Dictionary", href: "/slang" },
     { label: "Contact", href: "/#contact" },
   ];
 
@@ -40,20 +41,20 @@ export default function Navbar() {
         {/* Desktop links */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
               className="text-sm text-[#ababab] hover:text-white transition-colors"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
-          <a
+          <Link
             href="/#contact"
             className="text-sm px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-medium transition-colors"
           >
             Get in Touch
-          </a>
+          </Link>
         </div>
 
         {/* Mobile hamburger */}
@@ -76,22 +77,22 @@ export default function Navbar() {
       {menuOpen && (
         <div className="md:hidden bg-[#0a0a1a]/95 backdrop-blur-md border-t border-white/5 px-6 py-4 flex flex-col gap-4">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
               className="text-[#ababab] hover:text-white transition-colors py-1"
               onClick={() => setMenuOpen(false)}
             >
               {link.label}
-            </a>
+            </Link>
           ))}
-          <a
+          <Link
             href="/#contact"
             className="text-sm px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-medium transition-colors text-center"
             onClick={() => setMenuOpen(false)}
           >
             Get in Touch
-          </a>
+          </Link>
         </div>
       )}
     </nav>
