@@ -11,12 +11,12 @@ export const metadata: Metadata = {
   title: "Privacy Policy | Coffee Tasting | J&H Technology",
   description:
     "How the Coffee Tasting app handles your data: tastings stay on your device, crash reports are opt-in, and there are no ads or tracking.",
-  alternates: { canonical: "https://jandhtechnology.com/coffee-tasting/privacy" },
+  alternates: { canonical: "https://www.jandhtechnology.com/coffee-tasting/privacy" },
   openGraph: {
     title: "Privacy Policy | Coffee Tasting | J&H Technology",
     description:
       "How the Coffee Tasting app handles your data: tastings stay on your device, crash reports are opt-in, and there are no ads or tracking.",
-    url: "https://jandhtechnology.com/coffee-tasting/privacy",
+    url: "https://www.jandhtechnology.com/coffee-tasting/privacy",
     siteName: "J&H Technology",
     type: "article",
   },
@@ -26,7 +26,7 @@ export default function CoffeeTastingPrivacyPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen pt-32 pb-24 px-6">
+      <main id="main" tabIndex={-1} className="min-h-screen pt-32 pb-24 px-6">
         <article className="max-w-3xl mx-auto">
           <LegalHeader
             eyebrow="Coffee Tasting"

@@ -11,12 +11,12 @@ export const metadata: Metadata = {
   title: "Support | Coffee Tasting | J&H Technology",
   description:
     "Get help with the Coffee Tasting app: where your tastings are stored, how to delete them, and how to contact us.",
-  alternates: { canonical: "https://jandhtechnology.com/coffee-tasting/support" },
+  alternates: { canonical: "https://www.jandhtechnology.com/coffee-tasting/support" },
   openGraph: {
     title: "Support | Coffee Tasting | J&H Technology",
     description:
       "Get help with the Coffee Tasting app: where your tastings are stored, how to delete them, and how to contact us.",
-    url: "https://jandhtechnology.com/coffee-tasting/support",
+    url: "https://www.jandhtechnology.com/coffee-tasting/support",
     siteName: "J&H Technology",
     type: "article",
   },
@@ -26,7 +26,7 @@ export default function CoffeeTastingSupportPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen pt-32 pb-24 px-6">
+      <main id="main" tabIndex={-1} className="min-h-screen pt-32 pb-24 px-6">
         <article className="max-w-3xl mx-auto">
           <LegalHeader
             eyebrow="Coffee Tasting"

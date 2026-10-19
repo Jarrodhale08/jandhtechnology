@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { generationLabel, safetyLabel, type SafetyLevel, type SlangTerm } from "@/lib/slang-core";
+import { generationLabel, letterName, letterSlug, safetyLabel, type SafetyLevel, type SlangTerm } from "@/lib/slang-core";
 import { APP_NAME, APP_STORE_URL } from "@/lib/slang";
 
 export const SLANG_LINK =
@@ -192,9 +192,43 @@ export function LockedMeaning({ term }: { term: string }) {
 
 export const SLANG_SECTIONS = [
   { href: "/slang", label: "A–Z index" },
+  { href: "/slang/trending", label: "Trending" },
+  { href: "/slang/new-this-month", label: "New this month" },
+  { href: "/slang/gen-z", label: "Gen Z" },
   { href: "/slang/gen-alpha", label: "Gen Alpha" },
-  { href: "/slang/for-parents", label: "For parents" },
+  { href: "/slang/glossary-categories", label: "Categories" },
+  { href: "/slang/safety-guide", label: "Safety guide" },
+  { href: "/slang/for-teachers", label: "For teachers" },
+  { href: "/slang/for-grandparents", label: "For grandparents" },
+  { href: "/slang/how-it-works", label: "How it works" },
+  { href: "/slang/faq", label: "FAQ" },
+  { href: "/slang/about", label: "About" },
 ];
+
+export function LetterNav({ letters, current }: { letters: string[]; current?: string }) {
+  return (
+    <nav aria-label="Browse slang by first letter" className="mb-8">
+      <ul className="flex flex-wrap gap-1.5">
+        {letters.map((letter) => {
+          const slug = letterSlug(letter);
+          return (
+            <li key={letter}>
+              <Link
+                href={`/slang/letter/${slug}`}
+                prefetch={false}
+                aria-current={current === letter ? "page" : undefined}
+                className="inline-flex items-center justify-center min-w-11 min-h-11 px-2 rounded-lg bg-white/5 border border-white/20 text-sm font-medium text-[#e2e2e8] hover:text-white hover:border-indigo-400/60 aria-[current=page]:bg-indigo-500/25 aria-[current=page]:border-indigo-300"
+              >
+                <span className="sr-only">{letterName(letter)}</span>
+                <span aria-hidden="true">{letter === "#" ? "0–9" : letter}</span>
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
+  );
+}
 
 export function SlangSubnav({ current }: { current?: string }) {
   return (

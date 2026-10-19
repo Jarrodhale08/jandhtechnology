@@ -1,0 +1,15 @@
+/* TEAM */
+Company: J&H Technology LLC
+Contact: jarrod [at] jandhtechnology.com
+Site: https://www.jandhtechnology.com
+
+/* APPS */
+Slang Decoder (iPhone): https://apps.apple.com/app/id6759603354
+Slang index: https://www.jandhtechnology.com/slang
+
+/* SITE */
+Last update: 2026/10/18
+Language: English
+Standards: HTML5, WCAG 2.2 AA (target), schema.org JSON-LD, llms.txt
+Components: Next.js, React, Tailwind CSS
+Software: Vercel

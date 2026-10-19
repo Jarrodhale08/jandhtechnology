@@ -1,3 +1,6 @@
+import Link from "next/link";
+import { AppStoreBadge } from "@/components/slang/ui";
+
 const apps = [
   {
     name: "SplitSmart",
@@ -69,25 +72,42 @@ export default function Apps() {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="card-hover rounded-2xl bg-white/[0.03] border border-indigo-400/40 overflow-hidden md:col-span-2 lg:col-span-3">
+            <div className="p-6 md:p-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+              <div>
+                <h3 className="text-2xl font-semibold text-white">Slang Decoder</h3>
+                <p className="text-sm text-indigo-300 font-medium mb-3">Education · iPhone</p>
+                <p className="text-[#c4c4cc] leading-relaxed max-w-2xl">
+                  Understand Gen Z and Gen Alpha slang, with a parent safety rating on every term. Free to
+                  download, with an optional Premium subscription.{" "}
+                  <Link href="/slang" className="text-indigo-300 hover:text-indigo-200 underline underline-offset-2">
+                    Browse the slang index
+                  </Link>
+                  .
+                </p>
+              </div>
+              <AppStoreBadge className="shrink-0" />
+            </div>
+          </div>
           {apps.map((app) => (
             <div
               key={app.name}
               className="card-hover rounded-2xl bg-white/[0.03] border border-white/[0.06] hover:border-purple-500/30 overflow-hidden"
             >
-              <div className={`h-32 bg-gradient-to-br ${app.color} flex items-center justify-center text-5xl`}>
+              <div aria-hidden="true" className={`h-32 bg-gradient-to-br ${app.color} flex items-center justify-center text-5xl`}>
                 {app.icon}
               </div>
               <div className="p-5">
                 <div className="flex items-start justify-between mb-2">
                   <div>
                     <h3 className="text-lg font-semibold text-white">{app.name}</h3>
-                    <span className="text-xs text-indigo-400 font-medium">{app.category}</span>
+                    <span className="text-xs text-indigo-300 font-medium">{app.category}</span>
                   </div>
                   <div className="flex gap-1">
                     {app.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="text-xs px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[#ababab]"
+                        className="text-xs px-2 py-0.5 rounded-full bg-white/5 border border-white/20 text-[#c4c4cc]"
                       >
                         {tag}
                       </span>
@@ -103,7 +123,7 @@ export default function Apps() {
         <div className="text-center mt-12">
           <p className="text-[#ababab] text-sm">
             Have an app idea?{" "}
-            <a href="#contact" className="text-indigo-400 hover:text-indigo-300 underline underline-offset-4">
+            <a href="#contact" className="text-indigo-300 hover:text-indigo-200 underline underline-offset-4">
               Let&apos;s build it together.
             </a>
           </p>

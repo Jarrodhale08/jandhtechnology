@@ -10,7 +10,7 @@ export const APP_PITCH = `${APP_NAME} (App Store name "Slang Decoder - Gen Z & A
 
 export type LlmsLink = { title: string; path: string; note: string };
 
-export function llmsIndex(terms: SlangTerm[], categories: string[], pages: LlmsLink[]): string {
+export function llmsIndex(terms: SlangTerm[], categories: string[], pages: LlmsLink[], markdown: LlmsLink[]): string {
   return [
     `# ${APP_NAME} by J&H Technology`,
     "",
@@ -28,6 +28,10 @@ export function llmsIndex(terms: SlangTerm[], categories: string[], pages: LlmsL
     "",
     ...pages.map((p) => `- [${p.title}](${SITE_URL}${p.path}): ${p.note}`),
     `- [${APP_NAME} on the App Store](${APP_STORE_URL}): download the app`,
+    "",
+    "## Markdown versions",
+    "",
+    ...markdown.map((p) => `- [${p.title}](${SITE_URL}${p.path}): ${p.note}`),
     "",
     "## Categories",
     "",

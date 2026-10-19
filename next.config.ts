@@ -30,6 +30,19 @@ const nextConfig: NextConfig = {
   async headers() {
     return [{ source: "/(.*)", headers: securityHeaders }];
   },
+  async redirects() {
+    return [{ source: "/slang/for-parents", destination: "/slang/safety-guide", permanent: true }];
+  },
+  async rewrites() {
+    return {
+      beforeFiles: [
+        { source: "/slang.md", destination: "/md/slang" },
+        { source: "/slang/:slug.md", destination: "/md/slang/:slug" },
+      ],
+      afterFiles: [],
+      fallback: [],
+    };
+  },
 };
 
 export default nextConfig;

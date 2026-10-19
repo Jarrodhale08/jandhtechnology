@@ -16,12 +16,12 @@ export const metadata: Metadata = {
   title: "Privacy Policy | J&H Technology",
   description:
     "How J&H Technology LLC collects, uses, and protects information across all mobile applications and services.",
-  alternates: { canonical: "https://jandhtechnology.com/privacy" },
+  alternates: { canonical: "https://www.jandhtechnology.com/privacy" },
   openGraph: {
     title: "Privacy Policy | J&H Technology",
     description:
       "How J&H Technology LLC collects, uses, and protects information across all mobile applications and services.",
-    url: "https://jandhtechnology.com/privacy",
+    url: "https://www.jandhtechnology.com/privacy",
     siteName: "J&H Technology",
     type: "article",
   },
@@ -31,7 +31,7 @@ export default function PrivacyPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen pt-32 pb-24 px-6">
+      <main id="main" tabIndex={-1} className="min-h-screen pt-32 pb-24 px-6">
         <article className="max-w-3xl mx-auto">
           <LegalHeader
             eyebrow="Legal"

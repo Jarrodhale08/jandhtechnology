@@ -1,22 +1,42 @@
 import { NextRequest, NextResponse } from "next/server";
 
+const LIMITS = { name: 200, email: 320, message: 5000 };
+const EMAIL_RE = /^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/;
+
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function field(body: Record<string, unknown>, key: keyof typeof LIMITS): string | null {
+  const value = body[key];
+  if (typeof value !== "string") return null;
+  const trimmed = value.trim();
+  return trimmed && trimmed.length <= LIMITS[key] ? trimmed : null;
+}
+
 export async function POST(req: NextRequest) {
   try {
-    const { name, email, message } = await req.json();
+    const body = (await req.json()) as Record<string, unknown>;
+    const name = field(body, "name");
+    const email = field(body, "email");
+    const message = field(body, "message");
 
-    if (!name || !email || !message) {
-      return NextResponse.json({ error: "Missing fields" }, { status: 400 });
+    if (!name || !email || !message || !EMAIL_RE.test(email)) {
+      return NextResponse.json({ error: "Missing or invalid fields" }, { status: 400 });
     }
 
-    // Send via Resend (or fall back to a mailto log)
     const RESEND_API_KEY = process.env.RESEND_API_KEY;
-
     if (!RESEND_API_KEY) {
-      // In development or if key not set, just log
-      console.log("Contact form submission:", { name, email, message });
-      return NextResponse.json({ ok: true });
+      console.error("Contact form: RESEND_API_KEY is not set");
+      return NextResponse.json({ error: "Email is not configured" }, { status: 503 });
     }
 
+    const subjectName = name.replace(/[\r\n]+/g, " ");
     const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
@@ -27,28 +47,26 @@ export async function POST(req: NextRequest) {
         from: "website@jandhtechnology.com",
         to: "jarrod@jandhtechnology.com",
         reply_to: email,
-        subject: `New contact from ${name} — jandhtechnology.com`,
+        subject: `New contact from ${subjectName} — jandhtechnology.com`,
         text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
         html: `
           <h2>New Contact Form Submission</h2>
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
+          <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+          <p><strong>Email:</strong> ${escapeHtml(email)}</p>
           <hr/>
           <p><strong>Message:</strong></p>
-          <p>${message.replace(/\n/g, "<br/>")}</p>
+          <p>${escapeHtml(message).replace(/\n/g, "<br/>")}</p>
         `,
       }),
     });
 
     if (!res.ok) {
-      const err = await res.text();
-      console.error("Resend error:", err);
-      return NextResponse.json({ error: "Email failed" }, { status: 500 });
+      console.error("Resend error:", res.status);
+      return NextResponse.json({ error: "Email failed" }, { status: 502 });
     }
 
     return NextResponse.json({ ok: true });
-  } catch (err) {
-    console.error("Contact route error:", err);
-    return NextResponse.json({ error: "Server error" }, { status: 500 });
+  } catch {
+    return NextResponse.json({ error: "Invalid request" }, { status: 400 });
   }
 }

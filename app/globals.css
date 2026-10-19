@@ -54,3 +54,32 @@ html {
   transform: translateY(-4px);
   box-shadow: 0 20px 40px rgba(99, 102, 241, 0.15);
 }
+
+:focus-visible {
+  outline: 3px solid #c7d2fe;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+#main:focus {
+  outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .card-hover:hover {
+    transform: none;
+  }
+}

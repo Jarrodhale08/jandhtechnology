@@ -16,12 +16,12 @@ export const metadata: Metadata = {
   title: "Terms of Service | J&H Technology",
   description:
     "Terms of Service governing your use of all mobile applications and services developed and published by J&H Technology LLC.",
-  alternates: { canonical: "https://jandhtechnology.com/terms" },
+  alternates: { canonical: "https://www.jandhtechnology.com/terms" },
   openGraph: {
     title: "Terms of Service | J&H Technology",
     description:
       "Terms of Service governing your use of all mobile applications and services developed and published by J&H Technology LLC.",
-    url: "https://jandhtechnology.com/terms",
+    url: "https://www.jandhtechnology.com/terms",
     siteName: "J&H Technology",
     type: "article",
   },
@@ -31,7 +31,7 @@ export default function TermsPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen pt-32 pb-24 px-6">
+      <main id="main" tabIndex={-1} className="min-h-screen pt-32 pb-24 px-6">
         <article className="max-w-3xl mx-auto">
           <LegalHeader
             eyebrow="Legal"

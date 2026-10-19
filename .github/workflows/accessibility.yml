@@ -1,0 +1,38 @@
+name: Accessibility scan
+
+on:
+  workflow_dispatch:
+    inputs:
+      base_url:
+        description: Site to scan
+        default: https://www.jandhtechnology.com
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  axe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: axe-core on every sitemap page at 375px and 1440px
+        run: npx tsx uat-scripts/ada-scan.ts "$BASE_URL" 4 || true
+        env:
+          BASE_URL: ${{ inputs.base_url }}
+          SHARD: ${{ matrix.shard }}/6
+      - uses: actions/upload-artifact@v4
+        with:
+          name: axe-shard-${{ matrix.shard }}
+          path: uat-artifacts/ada/
