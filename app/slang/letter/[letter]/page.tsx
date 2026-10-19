@@ -6,7 +6,7 @@ import { AppStoreCta, Breadcrumbs, LetterNav, SLANG_LINK, SlangHeader, SlangSubn
 import { groupByLetter, letterFromSlug, letterSlug } from "@/lib/slang-core";
 import { APP_NAME, SITE_URL, getAllTerms } from "@/lib/slang";
 import { breadcrumbJsonLd, definedTermSetJsonLd, SLANG_INDEX_URL } from "@/lib/slang-jsonld";
-import { slangMetadata } from "@/lib/slang-metadata";
+import { NOT_FOUND_METADATA, slangMetadata } from "@/lib/slang-metadata";
 
 export const revalidate = 86400;
 export const dynamicParams = false;
@@ -30,7 +30,7 @@ function heading(letter: string) {
 
 export async function generateMetadata({ params }: PageProps<"/slang/letter/[letter]">): Promise<Metadata> {
   const data = await load((await params).letter);
-  if (!data) return {};
+  if (!data) return NOT_FOUND_METADATA;
   const label = data.letter === "#" ? "Numbers & Emoji" : data.letter;
   return slangMetadata({
     title: `Slang Terms: ${label} (${data.terms.length}) | ${APP_NAME}`,

@@ -26,3 +26,8 @@ export function slangMetadata({
     twitter: { card: "summary_large_image", title, description },
   };
 }
+
+export const NOT_FOUND_METADATA: Metadata = {
+  title: { absolute: "Page not found | J&H Technology" },
+  robots: { index: false },
+};

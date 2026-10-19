@@ -110,7 +110,7 @@ async function structure(page: Page) {
       if (i > 0 && l > levels[i - 1] + 1) skips++;
     });
     const linkTexts = Array.from(document.querySelectorAll("a")).map((a) =>
-      (a.getAttribute("aria-label") ?? a.textContent ?? a.querySelector("img")?.alt ?? "").trim().toLowerCase(),
+      (a.getAttribute("aria-label") || a.textContent?.trim() || a.querySelector("img")?.alt || "").trim().toLowerCase(),
     );
     const badges = Array.from(document.querySelectorAll('a[href^="https://apps.apple.com"] img')).map((i) => (i as HTMLImageElement).alt);
     const labelsMissing = Array.from(document.querySelectorAll("input,textarea,select")).filter((el) => {
