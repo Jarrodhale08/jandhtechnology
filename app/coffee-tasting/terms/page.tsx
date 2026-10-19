@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { LegalHeader, LegalSection, LegalList, LegalP } from "@/components/legal";
+import { CoffeeTastingRelatedLinks } from "@/components/coffee-tasting/RelatedLinks";
 
 const LAST_UPDATED = "October 18, 2026";
 const EFFECTIVE_DATE = "October 18, 2026";
@@ -130,6 +131,7 @@ export default function CoffeeTastingTermsPage() {
               </li>
             </LegalList>
           </LegalSection>
+          <CoffeeTastingRelatedLinks current="/coffee-tasting/terms" />
         </article>
       </main>
       <Footer />
