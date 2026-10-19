@@ -1,0 +1,2 @@
+Sampled 20 terms, 57 needles (>= 25 chars), scanned 24 URLs.
+PASS: no definition, example, or origin text found.
