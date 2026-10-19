@@ -42,11 +42,17 @@ export default async function SlangCategoryPage({ params }: PageProps<"/slang/ca
         data={breadcrumbJsonLd([
           { name: "Home", url: `${SITE_URL}/` },
           { name: "Slang dictionary", url: SLANG_INDEX_URL },
+          { name: "Categories", url: `${SLANG_INDEX_URL}/glossary-categories` },
           { name: `${label} slang`, url: `${SLANG_INDEX_URL}/category/${category}` },
         ])}
       />
       <Breadcrumbs
-        items={[{ name: "Home", href: "/" }, { name: "Slang dictionary", href: "/slang" }, { name: `${label} slang` }]}
+        items={[
+          { name: "Home", href: "/" },
+          { name: "Slang dictionary", href: "/slang" },
+          { name: "Categories", href: "/slang/glossary-categories" },
+          { name: `${label} slang` },
+        ]}
       />
       <SlangHeader eyebrow="Slang by category" title={`${label} slang`}>
         <p className="text-lg text-[#c8c8d0] leading-relaxed max-w-3xl">
@@ -54,7 +60,7 @@ export default async function SlangCategoryPage({ params }: PageProps<"/slang/ca
           a parent safety rating. Open any term to see how to look up its meaning in {APP_NAME}.
         </p>
       </SlangHeader>
-      <SlangSubnav />
+      <SlangSubnav current="/slang/glossary-categories" />
       <TermList terms={terms} />
       <AppStoreCta />
     </>

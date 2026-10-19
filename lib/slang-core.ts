@@ -128,8 +128,19 @@ export function letterOf(term: string): string {
   return first >= "A" && first <= "Z" ? first : "#";
 }
 
-export function letterAnchor(letter: string): string {
-  return letter === "#" ? "letter-num" : `letter-${letter.toLowerCase()}`;
+export const LETTERS = ["#", ..."ABCDEFGHIJKLMNOPQRSTUVWXYZ"];
+
+export function letterSlug(letter: string): string {
+  return letter === "#" ? "0-9" : letter.toLowerCase();
+}
+
+export function letterFromSlug(slug: string): string | null {
+  if (slug === "0-9") return "#";
+  return /^[a-z]$/.test(slug) ? slug.toUpperCase() : null;
+}
+
+export function letterName(letter: string): string {
+  return letter === "#" ? "Numbers and emoji" : `Letter ${letter}`;
 }
 
 export function groupByLetter(terms: SlangTerm[]): { letter: string; terms: SlangTerm[] }[] {
@@ -157,6 +168,25 @@ export function categoryLabel(category: string): string {
   return CATEGORY_LABELS[category] ?? category.charAt(0).toUpperCase() + category.slice(1);
 }
 
+const CATEGORY_DESCRIPTIONS: Record<string, string> = {
+  general: "Everyday slang that shows up in conversation, at school, and online.",
+  gaming: "Words from Roblox, Fortnite, Minecraft, and streaming culture.",
+  meme: "Phrases that started as memes and spread through short videos.",
+  tiktok: "Slang that took off on TikTok and other short-form video apps.",
+  texting: "Acronyms and shorthand used in texts, DMs, and group chats.",
+  insults: "Put-downs and teasing terms, many rated Edgy.",
+  workplace: "Slang that Gen Z brought into offices and job chats.",
+  music: "Terms from music fandoms, artists, and lyrics.",
+  fashion: "Words for style, outfits, and looks.",
+  relationships: "Slang about friendships, crushes, and relationships.",
+  reactions: "Quick words used to react to news, posts, and messages.",
+  dating: "Terms about dating and talking to someone new.",
+};
+
+export function categoryDescription(category: string): string {
+  return CATEGORY_DESCRIPTIONS[category] ?? `Gen Z and Gen Alpha slang in the ${categoryLabel(category)} category.`;
+}
+
 export function safetyLabel(s: SafetyLevel): string {
   if (s === "safe") return "Safe";
   if (s === "edgy") return "Edgy";
@@ -179,7 +209,7 @@ export function generationAnswer(t: SlangTerm): string {
 }
 
 export function meaningAnswer(t: SlangTerm): string {
-  return `The meaning of ${t.term}, with a real example and a parent note, is in the ${APP_LABEL} app for iPhone. ${APP_LABEL} is free to download, with an optional Premium subscription.`;
+  return `The meaning of ${t.term}, with a real example and a parent note, is in the ${APP_LABEL} app for iPhone. ${APP_LABEL} is free to download, with an optional Premium subscription that unlocks the full library.`;
 }
 
 export function displayTerm(term: string): string {
@@ -208,6 +238,22 @@ export const PAGES_REVISED_AT = "2026-10-18T12:00:00.000Z";
 
 export function pageUpdated(iso: string): string {
   return new Date(iso).getTime() > new Date(PAGES_REVISED_AT).getTime() ? iso : PAGES_REVISED_AT;
+}
+
+export function trendingTerms(terms: SlangTerm[], count: number): SlangTerm[] {
+  return terms
+    .filter((t) => t.trending)
+    .sort((a, b) => b.usageCount - a.usageCount || compareTerms(a.term, b.term))
+    .slice(0, count);
+}
+
+export function newestTerms(terms: SlangTerm[], count: number): SlangTerm[] {
+  return [...terms].sort((a, b) => b.createdAt.localeCompare(a.createdAt) || compareTerms(a.term, b.term)).slice(0, count);
+}
+
+export function addedInMonth(terms: SlangTerm[], now: Date): SlangTerm[] {
+  const prefix = now.toISOString().slice(0, 7);
+  return terms.filter((t) => t.createdAt.slice(0, 7) === prefix).sort((a, b) => compareTerms(a.term, b.term));
 }
 
 export function latestUpdate(terms: SlangTerm[]): string {

@@ -1,25 +1,48 @@
 import type { MetadataRoute } from "next";
-import { latestUpdate, pageUpdated } from "@/lib/slang-core";
+import { groupByLetter, latestUpdate, letterSlug, pageUpdated, PAGES_REVISED_AT } from "@/lib/slang-core";
 import { SITE_URL, getAllTerms, getCategories, termUrl } from "@/lib/slang";
+import { CONTENT_PAGES } from "@/lib/slang-pages";
 
 export const revalidate = 86400;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [terms, categories] = await Promise.all([getAllTerms(), getCategories()]);
+  const revised = new Date(PAGES_REVISED_AT);
   const dictionaryUpdated = new Date(pageUpdated(latestUpdate(terms)));
   const staticPages: MetadataRoute.Sitemap = [
-    { url: `${SITE_URL}/`, changeFrequency: "monthly", priority: 1 },
-    { url: `${SITE_URL}/privacy`, changeFrequency: "yearly", priority: 0.3 },
-    { url: `${SITE_URL}/terms`, changeFrequency: "yearly", priority: 0.3 },
-    { url: `${SITE_URL}/coffee-tasting/privacy`, changeFrequency: "yearly", priority: 0.3 },
-    { url: `${SITE_URL}/coffee-tasting/terms`, changeFrequency: "yearly", priority: 0.3 },
-    { url: `${SITE_URL}/coffee-tasting/support`, changeFrequency: "yearly", priority: 0.3 },
-  ];
-  const hubs: MetadataRoute.Sitemap = ["/slang", "/slang/gen-alpha", "/slang/for-parents"].map((path) => ({
+    "/",
+    "/accessibility",
+    "/privacy",
+    "/terms",
+    "/coffee-tasting/privacy",
+    "/coffee-tasting/terms",
+    "/coffee-tasting/support",
+    "/coffee-tasting/delete-account",
+  ].map((path) => ({
     url: `${SITE_URL}${path}`,
-    lastModified: dictionaryUpdated,
-    changeFrequency: "daily",
-    priority: path === "/slang" ? 0.9 : 0.8,
+    lastModified: revised,
+    changeFrequency: path === "/" ? "monthly" : "yearly",
+    priority: path === "/" ? 1 : 0.3,
+  }));
+  const hubs: MetadataRoute.Sitemap = ["/slang", "/slang/trending", "/slang/new-this-month", "/slang/glossary-categories"].map(
+    (path) => ({
+      url: `${SITE_URL}${path}`,
+      lastModified: dictionaryUpdated,
+      changeFrequency: "daily",
+      priority: path === "/slang" ? 0.9 : 0.8,
+    }),
+  );
+  const guides: MetadataRoute.Sitemap = CONTENT_PAGES.map((p) => ({
+    url: `${SITE_URL}${p.path}`,
+    lastModified: revised,
+    changeFrequency: "monthly",
+    priority: 0.8,
+  }));
+  const letterPages: MetadataRoute.Sitemap = groupByLetter(terms).map((g) => ({
+    url: `${SITE_URL}/slang/letter/${letterSlug(g.letter)}`,
+    lastModified: new Date(pageUpdated(latestUpdate(g.terms))),
+    changeFrequency: "weekly",
+    priority: 0.6,
   }));
   const categoryPages: MetadataRoute.Sitemap = categories.map(({ category }) => ({
     url: `${SITE_URL}/slang/category/${category}`,
@@ -33,5 +56,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     changeFrequency: "monthly",
     priority: 0.7,
   }));
-  return [...staticPages, ...hubs, ...categoryPages, ...termPages];
+  return [...staticPages, ...hubs, ...guides, ...letterPages, ...categoryPages, ...termPages];
 }

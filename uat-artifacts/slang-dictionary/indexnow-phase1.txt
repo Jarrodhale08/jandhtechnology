@@ -1,0 +1,2 @@
+IndexNow batch 1: 1027 URLs -> HTTP 403 {"errorCode":"SiteVerificationNotCompleted","message":"Site Verification is not completed. Please wait for some time for the verification to complete and try again.","details":null}
+20:01:09 IndexNow batch 1: 1027 URLs -> HTTP 200 (after initial 403 SiteVerificationNotCompleted at first submit)

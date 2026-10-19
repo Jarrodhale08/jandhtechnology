@@ -6,7 +6,11 @@ import {
   displayTerm,
   generationAnswer,
   groupByLetter,
-  letterAnchor,
+  letterFromSlug,
+  letterSlug,
+  addedInMonth,
+  newestTerms,
+  trendingTerms,
   meaningAnswer,
   normalizeRows,
   pageUpdated,
@@ -60,8 +64,13 @@ test("cleanText collapses doubled quotes and whitespace, nulls empties", () => {
 test("groupByLetter puts non-letters first under #", () => {
   const groups = groupByLetter(normalizeRows([row({ term: "bet" }), row({ term: "67" }), row({ term: "Aura" })]));
   assert.deepEqual(groups.map((g) => g.letter), ["#", "A", "B"]);
-  assert.equal(letterAnchor("#"), "letter-num");
-  assert.equal(letterAnchor("B"), "letter-b");
+  assert.equal(letterSlug("#"), "0-9");
+  assert.equal(letterSlug("B"), "b");
+  assert.equal(letterFromSlug("0-9"), "#");
+  assert.equal(letterFromSlug("b"), "B");
+  assert.equal(letterFromSlug("B"), null);
+  assert.equal(letterFromSlug("ab"), null);
+  assert.equal(letterFromSlug("#"), null);
 });
 
 test("relatedTerms returns neighbours in the same category without self", () => {
@@ -134,4 +143,18 @@ test("FAQ answers come from the rating label and generation only", () => {
 test("pageUpdated never reports a date before the no-definition rebuild", () => {
   assert.equal(pageUpdated("2026-03-01T00:00:00Z"), PAGES_REVISED_AT);
   assert.equal(pageUpdated("2027-01-01T00:00:00.000Z"), "2027-01-01T00:00:00.000Z");
+});
+
+test("trending, newest and month helpers", () => {
+  const terms = normalizeRows([
+    row({ term: "a", trending: true, usage_count: 5, created_at: "2026-10-02T00:00:00Z" }),
+    row({ term: "b", trending: true, usage_count: 9, created_at: "2026-09-30T23:59:59Z" }),
+    row({ term: "c", trending: false, usage_count: 99, created_at: "2026-10-18T00:00:00Z" }),
+    row({ term: "d", trending: true, usage_count: 5, created_at: "2026-03-01T00:00:00Z" }),
+  ]);
+  assert.deepEqual(trendingTerms(terms, 2).map((t) => t.term), ["b", "a"]);
+  assert.deepEqual(trendingTerms(terms, 10).map((t) => t.term), ["b", "a", "d"]);
+  assert.deepEqual(newestTerms(terms, 2).map((t) => t.term), ["c", "a"]);
+  assert.deepEqual(addedInMonth(terms, new Date("2026-10-18T12:00:00Z")).map((t) => t.term), ["a", "c"]);
+  assert.deepEqual(addedInMonth(terms, new Date("2026-11-01T00:00:00Z")), []);
 });

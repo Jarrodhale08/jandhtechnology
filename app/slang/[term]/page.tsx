@@ -16,9 +16,12 @@ import {
   displayTerm,
   formatDate,
   generationLabel,
+  letterOf,
+  letterSlug,
   pageUpdated,
   relatedTerms,
   safetyLabel,
+  type Generation,
 } from "@/lib/slang-core";
 import { APP_NAME, SITE_URL, getAllTerms, getTermBySlug, termUrl } from "@/lib/slang";
 import {
@@ -31,6 +34,14 @@ import {
 import { slangMetadata } from "@/lib/slang-metadata";
 
 export const revalidate = 86400;
+
+function generationLinks(g: Generation) {
+  const z = { href: "/slang/gen-z", label: "Who is Gen Z?" };
+  const alpha = { href: "/slang/gen-alpha", label: "Who is Gen Alpha?" };
+  if (g === "gen-z") return [z];
+  if (g === "gen-alpha") return [alpha];
+  return [z, alpha];
+}
 
 export async function generateStaticParams() {
   return (await getAllTerms()).map((t) => ({ term: t.slug }));
@@ -45,6 +56,7 @@ export async function generateMetadata({ params }: PageProps<"/slang/[term]">): 
     description: `${term.term}: ${generationLabel(term.generation)} slang, ${categoryLabel(term.category)} category, rated ${safetyLabel(term.safety)} for parents. See what it means in the ${APP_NAME} iPhone app.`,
     path: `/slang/${term.slug}`,
     type: "article",
+    markdownPath: `/slang/${term.slug}.md`,
   });
 }
 
@@ -143,6 +155,30 @@ export default async function SlangTermPage({ params }: PageProps<"/slang/[term]
           </p>
         </section>
       )}
+
+      <nav aria-labelledby="more-heading" className="mt-12">
+        <h2 id="more-heading" className="text-2xl font-semibold text-white mb-4">
+          Keep exploring
+        </h2>
+        <ul className="grid gap-2 sm:grid-cols-2 text-[#d4d4dc]">
+          {generationLinks(term.generation).map((g) => (
+            <li key={g.href}>
+              <Link href={g.href} className={`${SLANG_LINK} inline-flex min-h-8 items-center`}>{g.label}</Link>
+            </li>
+          ))}
+          <li>
+            <Link href={`/slang/letter/${letterSlug(letterOf(term.term))}`} className={`${SLANG_LINK} inline-flex min-h-8 items-center`}>
+              {letterOf(term.term) === "#" ? "More slang starting with a number or emoji" : `More slang starting with ${letterOf(term.term)}`}
+            </Link>
+          </li>
+          <li>
+            <Link href="/slang/safety-guide" className={`${SLANG_LINK} inline-flex min-h-8 items-center`}>Slang safety guide for parents</Link>
+          </li>
+          <li>
+            <Link href="/slang/faq" className={`${SLANG_LINK} inline-flex min-h-8 items-center`}>Slang Decoder FAQ</Link>
+          </li>
+        </ul>
+      </nav>
 
       <p className="mt-10 text-sm text-[#b4b4be]">
         Last updated <time dateTime={updated}>{formatDate(updated)}</time>

@@ -12,11 +12,11 @@ const DESCRIPTION =
 export const metadata: Metadata = {
   title: "Delete your account and data | Coffee Tasting | J&H Technology",
   description: DESCRIPTION,
-  alternates: { canonical: "https://jandhtechnology.com/coffee-tasting/delete-account" },
+  alternates: { canonical: "https://www.jandhtechnology.com/coffee-tasting/delete-account" },
   openGraph: {
     title: "Delete your account and data | Coffee Tasting | J&H Technology",
     description: DESCRIPTION,
-    url: "https://jandhtechnology.com/coffee-tasting/delete-account",
+    url: "https://www.jandhtechnology.com/coffee-tasting/delete-account",
     siteName: "J&H Technology",
     type: "article",
   },
@@ -26,7 +26,7 @@ export default function CoffeeTastingDeleteAccountPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen pt-32 pb-24 px-6">
+      <main id="main" tabIndex={-1} className="min-h-screen pt-32 pb-24 px-6">
         <article className="max-w-3xl mx-auto">
           <LegalHeader
             eyebrow="Coffee Tasting"

@@ -16,12 +16,12 @@ export const metadata: Metadata = {
   title: "Terms of Service | Coffee Tasting | J&H Technology",
   description:
     "The terms that apply to the Coffee Tasting app, which supplement Apple's standard Licensed Application End User License Agreement.",
-  alternates: { canonical: "https://jandhtechnology.com/coffee-tasting/terms" },
+  alternates: { canonical: "https://www.jandhtechnology.com/coffee-tasting/terms" },
   openGraph: {
     title: "Terms of Service | Coffee Tasting | J&H Technology",
     description:
       "The terms that apply to the Coffee Tasting app, which supplement Apple's standard Licensed Application End User License Agreement.",
-    url: "https://jandhtechnology.com/coffee-tasting/terms",
+    url: "https://www.jandhtechnology.com/coffee-tasting/terms",
     siteName: "J&H Technology",
     type: "article",
   },
@@ -31,7 +31,7 @@ export default function CoffeeTastingTermsPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen pt-32 pb-24 px-6">
+      <main id="main" tabIndex={-1} className="min-h-screen pt-32 pb-24 px-6">
         <article className="max-w-3xl mx-auto">
           <LegalHeader
             eyebrow="Coffee Tasting"

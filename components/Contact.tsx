@@ -1,10 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const resultRef = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    if (status === "sent") resultRef.current?.focus();
+  }, [status]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,17 +51,18 @@ export default function Contact() {
           </p>
         </div>
 
-        <div className="p-8 rounded-2xl bg-white/[0.03] border border-white/[0.06]">
+        <div aria-live="polite" className="p-8 rounded-2xl bg-white/[0.03] border border-white/[0.06]">
           {status === "sent" ? (
             <div className="text-center py-12">
-              <div className="text-5xl mb-4">✅</div>
-              <h3 className="text-xl font-semibold text-white mb-2">Message Sent!</h3>
+              <div aria-hidden="true" className="text-5xl mb-4">✅</div>
+              <h3 ref={resultRef} tabIndex={-1} className="text-xl font-semibold text-white mb-2">Message Sent!</h3>
               <p className="text-[#ababab]">
                 Thanks for reaching out. We&apos;ll be in touch within 24 hours.
               </p>
               <button
+                type="button"
                 onClick={() => setStatus("idle")}
-                className="mt-6 text-indigo-400 hover:text-indigo-300 text-sm underline underline-offset-4"
+                className="mt-6 min-h-11 px-2 text-indigo-300 hover:text-indigo-200 text-sm underline underline-offset-4"
               >
                 Send another message
               </button>
@@ -65,50 +71,59 @@ export default function Contact() {
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="grid md:grid-cols-2 gap-5">
                 <div>
-                  <label className="block text-sm font-medium text-[#ababab] mb-2">
-                    Name
+                  <label htmlFor="contact-name" className="block text-sm font-medium text-[#c4c4cc] mb-2">
+                    Name <span aria-hidden="true">*</span>
                   </label>
                   <input
+                    id="contact-name"
+                    name="name"
+                    autoComplete="name"
                     type="text"
                     required
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
                     placeholder="Your name"
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-[#555] focus:outline-none focus:border-indigo-500/50 transition-colors"
+                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/40 text-white placeholder-[#a4a4ae] focus:border-indigo-300 transition-colors"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-[#ababab] mb-2">
-                    Email
+                  <label htmlFor="contact-email" className="block text-sm font-medium text-[#c4c4cc] mb-2">
+                    Email <span aria-hidden="true">*</span>
                   </label>
                   <input
+                    id="contact-email"
+                    name="email"
+                    autoComplete="email"
                     type="email"
                     required
                     value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
                     placeholder="your@email.com"
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-[#555] focus:outline-none focus:border-indigo-500/50 transition-colors"
+                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/40 text-white placeholder-[#a4a4ae] focus:border-indigo-300 transition-colors"
                   />
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-[#ababab] mb-2">
-                  Tell us about your app idea
+                <label htmlFor="contact-message" className="block text-sm font-medium text-[#c4c4cc] mb-2">
+                  Tell us about your app idea <span aria-hidden="true">*</span>
                 </label>
                 <textarea
+                  id="contact-message"
+                  name="message"
+                  maxLength={5000}
                   required
                   rows={5}
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
                   placeholder="Describe your app concept, target audience, and any specific features you need..."
-                  className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-[#555] focus:outline-none focus:border-indigo-500/50 transition-colors resize-none"
+                  className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/40 text-white placeholder-[#a4a4ae] focus:border-indigo-300 transition-colors resize-none"
                 />
               </div>
 
               {status === "error" && (
-                <p className="text-red-400 text-sm">
+                <p role="alert" className="text-red-300 text-sm">
                   Something went wrong. Please email us directly at{" "}
-                  <a href="mailto:jarrod@jandhtechnology.com" className="underline">
+                  <a href="mailto:jarrod@jandhtechnology.com" className="underline underline-offset-2">
                     jarrod@jandhtechnology.com
                   </a>
                 </p>
@@ -117,16 +132,20 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={status === "sending"}
-                className="w-full py-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 disabled:bg-indigo-800 text-white font-semibold text-lg transition-colors"
+                className="w-full py-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 disabled:bg-indigo-800 disabled:text-indigo-100 text-white font-semibold text-lg transition-colors"
               >
                 {status === "sending" ? "Sending..." : "Send Message"}
               </button>
 
-              <p className="text-center text-[#ababab] text-sm">
+              <p className="text-center text-[#c4c4cc] text-sm">
+                Fields marked * are required.
+              </p>
+
+              <p className="text-center text-[#c4c4cc] text-sm">
                 Or email us directly at{" "}
                 <a
                   href="mailto:jarrod@jandhtechnology.com"
-                  className="text-indigo-400 hover:text-indigo-300"
+                  className="text-indigo-300 hover:text-indigo-200 underline underline-offset-2"
                 >
                   jarrod@jandhtechnology.com
                 </a>
