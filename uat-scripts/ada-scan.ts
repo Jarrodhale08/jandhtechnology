@@ -13,7 +13,7 @@ const WIDTHS = [
   { name: "375", width: 375, height: 812 },
   { name: "1440", width: 1440, height: 900 },
 ];
-const EXTRA_PATHS = ["/this-page-does-not-exist"];
+const EXTRA_PATHS = ["/this-page-does-not-exist", "/slang/no-such-term-xyz"];
 const TAGS = ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22a", "wcag22aa", "best-practice"];
 
 type Finding = { path: string; width: string; id: string; impact: string | null; nodes: number; target: string };

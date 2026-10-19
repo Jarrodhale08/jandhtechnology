@@ -1,0 +1,187 @@
+- link "Skip to main content":
+  - /url: "#main"
+- banner:
+  - link "J&H Technology":
+    - /url: /
+  - navigation "Main":
+    - link "Services":
+      - /url: /#services
+    - link "Apps":
+      - /url: /#apps
+    - link "Process":
+      - /url: /#process
+    - link "About":
+      - /url: /#about
+    - link "Slang Dictionary":
+      - /url: /slang
+    - link "Contact":
+      - /url: /#contact
+    - link "Get in Touch":
+      - /url: /#contact
+- main:
+  - navigation "Breadcrumb":
+    - list:
+      - listitem:
+        - link "Home":
+          - /url: /
+      - listitem:
+        - link "Slang dictionary":
+          - /url: /slang
+      - listitem: FAQ
+  - paragraph: Slang Decoder help
+  - heading "Slang Decoder FAQ" [level=1]
+  - paragraph: Common questions from parents, grandparents, and teachers about Slang Decoder and about keeping up with Gen Z and Gen Alpha slang.
+  - navigation "Slang dictionary sections":
+    - list:
+      - listitem:
+        - link "A–Z index":
+          - /url: /slang
+      - listitem:
+        - link "Trending":
+          - /url: /slang/trending
+      - listitem:
+        - link "New this month":
+          - /url: /slang/new-this-month
+      - listitem:
+        - link "Gen Z":
+          - /url: /slang/gen-z
+      - listitem:
+        - link "Gen Alpha":
+          - /url: /slang/gen-alpha
+      - listitem:
+        - link "Categories":
+          - /url: /slang/glossary-categories
+      - listitem:
+        - link "Safety guide":
+          - /url: /slang/safety-guide
+      - listitem:
+        - link "For teachers":
+          - /url: /slang/for-teachers
+      - listitem:
+        - link "For grandparents":
+          - /url: /slang/for-grandparents
+      - listitem:
+        - link "How it works":
+          - /url: /slang/how-it-works
+      - listitem:
+        - link "FAQ":
+          - /url: /slang/faq
+      - listitem:
+        - link "About":
+          - /url: /slang/about
+  - region "Frequently asked questions":
+    - heading "Frequently asked questions" [level=2]
+    - term: What is Slang Decoder?
+    - definition: Slang Decoder is an iPhone app from J&H Technology that helps parents, grandparents, and teachers understand Gen Z and Gen Alpha slang. Every term in the app has a plain-English meaning, a real example, the generation that uses it, and a parent safety rating.
+    - term: How much does Slang Decoder cost?
+    - definition: Slang Decoder is free to download, with an optional Premium subscription ($2.99 a month or $19.99 a year, with a 7-day free trial). Premium unlocks the full library, the Slang Age Quiz, the Quiz Your Parents generator, the two-way text translator, and unlimited flashcards and quizzes.
+    - term: Is Slang Decoder available on Android?
+    - definition: Not yet. Slang Decoder is available for iPhone on the App Store and requires iOS 15.1 or later.
+    - term: Why doesn't this website show what each term means?
+    - definition:
+      - text: "Meanings, example sentences, and parent notes live in the Slang Decoder app, where they stay together and up to date. This website is the public index: it shows each term's generation, category, and safety rating, and links to the app. See"
+      - link "how Slang Decoder works":
+        - /url: /slang/how-it-works
+      - text: .
+    - term: How do the safety ratings work?
+    - definition:
+      - text: Every term is rated Safe (everyday slang that is not rude or explicit), Edgy (can be rude, mean, or suggestive depending on context), or Parent alert (can relate to self-harm, drugs, sexual content, or unsafe contact). The
+      - link "safety guide":
+        - /url: /slang/safety-guide
+      - text: explains what to do when a term worries you.
+    - term: Who curates the slang terms?
+    - definition:
+      - text: Terms are curated by J&H Technology and reviewed before they are published. Read our
+      - link "editorial standards":
+        - /url: /slang/about
+      - text: .
+    - term: How can I understand what my teen is saying?
+    - definition:
+      - text: Listen for the words that come up again and again, look them up, and then ask your teen what they mean to them. Slang shifts with context, so the way your teen uses a word matters as much as the dictionary meaning. Browsing
+      - link "trending slang":
+        - /url: /slang/trending
+      - text: is a quick way to see what is common right now.
+    - term: How should I talk to my kids about slang?
+    - definition:
+      - text: Be curious rather than critical. Ask what a word means and where they heard it, let them be the expert, and save serious conversations for terms that point to real risk. The
+      - link "safety guide":
+        - /url: /slang/safety-guide
+      - text: has conversation starters.
+    - term: What should I do if a term my child uses worries me?
+    - definition: Stay calm and ask open questions in private. If you are worried your child may hurt themselves, call or text 988 in the US to reach the 988 Suicide & Crisis Lifeline at any time. If anyone is in immediate danger, call 911.
+    - term: What is the difference between Gen Z and Gen Alpha?
+    - definition:
+      - text: Gen Z is usually defined as people born from about 1997 to 2012 (the Pew Research Center definition). Gen Alpha is usually defined as people born from about 2010 to 2024 (the range used by McCrindle, the research firm that coined the name). Definitions vary by a year or two. Learn more about
+      - link "Gen Z":
+        - /url: /slang/gen-z
+      - text: and
+      - link "Gen Alpha":
+        - /url: /slang/gen-alpha
+      - text: .
+    - term: Does Slang Decoder collect my data?
+    - definition:
+      - text: The App Store privacy label for Slang Decoder says Data Not Collected. Our
+      - link "privacy policy":
+        - /url: /privacy
+      - text: explains how J&H Technology handles data across its apps.
+    - term: How do I cancel Slang Decoder Premium?
+    - definition: Premium is billed through your Apple ID. On your iPhone, open Settings, tap your name, tap Subscriptions, choose Slang Decoder, and tap Cancel Subscription. Cancel at least 24 hours before the trial or billing period ends to avoid being charged.
+    - term: Is Slang Decoder appropriate for children?
+    - definition: The app is rated 4+ on the App Store and is designed for adults who want to understand young people. Some terms in the library carry a Parent alert rating because of what they refer to.
+    - term: Can teachers use Slang Decoder?
+    - definition:
+      - text: Yes. See
+      - link "Slang Decoder for teachers":
+        - /url: /slang/for-teachers
+      - text: for classroom ideas.
+  - complementary "Get Slang Decoder for iPhone":
+    - heading "Get Slang Decoder for iPhone" [level=2]
+    - paragraph: Slang Decoder for iPhone explains 1,000+ Gen Z and Gen Alpha slang terms with a plain-English meaning, a real example, and a parent safety rating. Free to download, with an optional Premium subscription ($2.99/month or $19.99/year, 7-day free trial).
+    - link "Download Slang Decoder on the App Store":
+      - /url: https://apps.apple.com/app/id6759603354
+      - img "Download Slang Decoder on the App Store"
+- contentinfo:
+  - region "Get Slang Decoder":
+    - heading "Get Slang Decoder" [level=2]
+    - paragraph: Understand Gen Z and Gen Alpha slang on your iPhone. Free to download, with an optional Premium subscription.
+    - link "Download Slang Decoder on the App Store":
+      - /url: https://apps.apple.com/app/id6759603354
+      - img "Download Slang Decoder on the App Store"
+  - link "J&H Technology LLC":
+    - /url: /
+  - navigation "Footer":
+    - list:
+      - listitem:
+        - link "Services":
+          - /url: /#services
+      - listitem:
+        - link "Apps":
+          - /url: /#apps
+      - listitem:
+        - link "Process":
+          - /url: /#process
+      - listitem:
+        - link "About":
+          - /url: /#about
+      - listitem:
+        - link "Contact":
+          - /url: /#contact
+      - listitem:
+        - link "Slang Dictionary":
+          - /url: /slang
+      - listitem:
+        - link "Slang Decoder FAQ":
+          - /url: /slang/faq
+      - listitem:
+        - link "Accessibility":
+          - /url: /accessibility
+      - listitem:
+        - link "Terms":
+          - /url: /terms
+      - listitem:
+        - link "Privacy":
+          - /url: /privacy
+  - link "jarrod@jandhtechnology.com":
+    - /url: mailto:jarrod@jandhtechnology.com
+  - paragraph: Copyright © 2026 J&H Technology LLC — All Rights Reserved
+- alert

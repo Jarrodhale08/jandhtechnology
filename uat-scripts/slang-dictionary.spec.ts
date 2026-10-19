@@ -265,7 +265,9 @@ test.describe("slang funnel", () => {
     await page.getByLabel("Tell us about your app idea").fill("Automated accessibility check, please ignore.");
     await expect(page.getByLabel("Email")).toHaveAttribute("autocomplete", "email");
     await page.getByRole("button", { name: "Send Message" }).click();
-    await expect(page.getByRole("alert").or(page.getByRole("heading", { name: "Message Sent!" }))).toBeVisible();
+    await expect(
+      page.getByRole("alert").filter({ hasText: "Something went wrong" }).or(page.getByRole("heading", { name: "Message Sent!" })),
+    ).toBeVisible();
   });
 
   test("mobile menu toggle exposes state and closes with Escape", async ({ page }) => {

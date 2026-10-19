@@ -5,7 +5,7 @@ import { AppStoreCta, Breadcrumbs, SlangHeader, SlangSubnav, TermList } from "@/
 import { categoryLabel } from "@/lib/slang-core";
 import { APP_NAME, SITE_URL, getAllTerms, getCategories } from "@/lib/slang";
 import { breadcrumbJsonLd, SLANG_INDEX_URL } from "@/lib/slang-jsonld";
-import { slangMetadata } from "@/lib/slang-metadata";
+import { NOT_FOUND_METADATA, slangMetadata } from "@/lib/slang-metadata";
 
 export const revalidate = 86400;
 
@@ -21,7 +21,7 @@ async function loadCategory(category: string) {
 export async function generateMetadata({ params }: PageProps<"/slang/category/[category]">): Promise<Metadata> {
   const { category } = await params;
   const terms = await loadCategory(category);
-  if (!terms) return {};
+  if (!terms) return NOT_FOUND_METADATA;
   const label = categoryLabel(category);
   return slangMetadata({
     title: `${label} Slang: ${terms.length} Gen Z & Gen Alpha Terms | ${APP_NAME}`,

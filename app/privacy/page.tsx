@@ -535,7 +535,7 @@ export default function PrivacyPage() {
             </div>
           </LegalSection>
 
-          <div className="mt-16 pt-8 border-t border-white/[0.06] text-center text-sm text-[#666]">
+          <div className="mt-16 pt-8 border-t border-white/[0.06] text-center text-sm text-[#a4a4ae]">
             Copyright &copy; {new Date().getFullYear()} J&amp;H Technology LLC. All rights reserved.
           </div>
         </article>

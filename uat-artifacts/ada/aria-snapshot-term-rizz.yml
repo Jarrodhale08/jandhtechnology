@@ -1,0 +1,173 @@
+- link "Skip to main content":
+  - /url: "#main"
+- banner:
+  - link "J&H Technology":
+    - /url: /
+  - navigation "Main":
+    - link "Services":
+      - /url: /#services
+    - link "Apps":
+      - /url: /#apps
+    - link "Process":
+      - /url: /#process
+    - link "About":
+      - /url: /#about
+    - link "Slang Dictionary":
+      - /url: /slang
+    - link "Contact":
+      - /url: /#contact
+    - link "Get in Touch":
+      - /url: /#contact
+- main:
+  - article:
+    - navigation "Breadcrumb":
+      - list:
+        - listitem:
+          - link "Home":
+            - /url: /
+        - listitem:
+          - link "Slang dictionary":
+            - /url: /slang
+        - listitem:
+          - link "TikTok":
+            - /url: /slang/category/tiktok
+        - listitem: Rizz
+    - paragraph: Gen Z slang
+    - heading "What does Rizz mean?" [level=1]
+    - term: Generation
+    - definition: Gen Z
+    - term: Category
+    - definition:
+      - link "TikTok":
+        - /url: /slang/category/tiktok
+    - term: Parent safety rating
+    - definition: Safe
+    - term: Status
+    - definition: Marked trending in Slang Decoder
+    - region "Meaning and example":
+      - heading "Meaning and example" [level=2]
+      - paragraph: See what “Rizz” means in Slang Decoder
+      - paragraph: The meaning, a real example sentence, and a parent note for Rizz are in the Slang Decoder app for iPhone. Free to download, with an optional Premium subscription.
+      - link "Download Slang Decoder on the App Store":
+        - /url: https://apps.apple.com/app/id6759603354
+        - img "Download Slang Decoder on the App Store"
+    - region "Questions parents ask about Rizz":
+      - heading "Questions parents ask about Rizz" [level=2]
+      - term: Is Rizz safe for kids?
+      - definition: Slang Decoder rates Rizz as Safe, meaning it is everyday slang that is not rude or explicit.
+      - term: Which generation uses Rizz?
+      - definition: Rizz is mostly used by Gen Z.
+      - term: Where can I find the meaning of Rizz?
+      - definition: The meaning of Rizz, with a real example and a parent note, is in the Slang Decoder app for iPhone. Slang Decoder is free to download, with an optional Premium subscription that unlocks the full library.
+    - region "Related TikTok slang":
+      - heading "Related TikTok slang" [level=2]
+      - list:
+        - listitem:
+          - link "Rizzler":
+            - /url: /slang/rizzler
+          - text: "Generation: Gen Alpha Safety rating: Safe"
+        - listitem:
+          - link "Reverse Ratio":
+            - /url: /slang/reverse-ratio
+          - text: "Generation: Gen Alpha Safety rating: Safe"
+        - listitem:
+          - link "Roman Empire":
+            - /url: /slang/roman-empire
+          - text: "Generation: Gen Z Safety rating: Safe"
+        - listitem:
+          - link "Rent Free":
+            - /url: /slang/rent-free
+          - text: "Generation: Gen Z Safety rating: Safe"
+        - listitem:
+          - link "Serving":
+            - /url: /slang/serving
+          - text: "Generation: Gen Z Safety rating: Safe"
+        - listitem:
+          - link "Red Flag":
+            - /url: /slang/red-flag
+          - text: "Generation: Gen Z & Gen Alpha Safety rating: Safe"
+        - listitem:
+          - link "Shadow Ban":
+            - /url: /slang/shadow-ban
+          - text: "Generation: Gen Z & Gen Alpha Safety rating: Safe"
+        - listitem:
+          - link "Reaction Clip":
+            - /url: /slang/reaction-clip
+          - text: "Generation: Gen Z & Gen Alpha Safety rating: Safe"
+      - paragraph:
+        - text: Browse all
+        - link "TikTok slang":
+          - /url: /slang/category/tiktok
+        - text: or the
+        - link "full slang index":
+          - /url: /slang
+        - text: .
+    - navigation "Keep exploring":
+      - heading "Keep exploring" [level=2]
+      - list:
+        - listitem:
+          - link "Who is Gen Z?":
+            - /url: /slang/gen-z
+        - listitem:
+          - link "More slang starting with R":
+            - /url: /slang/letter/r
+        - listitem:
+          - link "Slang safety guide for parents":
+            - /url: /slang/safety-guide
+        - listitem:
+          - link "Slang Decoder FAQ":
+            - /url: /slang/faq
+    - paragraph:
+      - text: Last updated
+      - time: October 18, 2026
+    - complementary "See what “Rizz” means in Slang Decoder":
+      - heading "See what “Rizz” means in Slang Decoder" [level=2]
+      - paragraph: Slang Decoder for iPhone explains 1,000+ Gen Z and Gen Alpha slang terms with a plain-English meaning, a real example, and a parent safety rating. Free to download, with an optional Premium subscription ($2.99/month or $19.99/year, 7-day free trial).
+      - link "Download Slang Decoder on the App Store":
+        - /url: https://apps.apple.com/app/id6759603354
+        - img "Download Slang Decoder on the App Store"
+- contentinfo:
+  - region "Get Slang Decoder":
+    - heading "Get Slang Decoder" [level=2]
+    - paragraph: Understand Gen Z and Gen Alpha slang on your iPhone. Free to download, with an optional Premium subscription.
+    - link "Download Slang Decoder on the App Store":
+      - /url: https://apps.apple.com/app/id6759603354
+      - img "Download Slang Decoder on the App Store"
+  - link "J&H Technology LLC":
+    - /url: /
+  - navigation "Footer":
+    - list:
+      - listitem:
+        - link "Services":
+          - /url: /#services
+      - listitem:
+        - link "Apps":
+          - /url: /#apps
+      - listitem:
+        - link "Process":
+          - /url: /#process
+      - listitem:
+        - link "About":
+          - /url: /#about
+      - listitem:
+        - link "Contact":
+          - /url: /#contact
+      - listitem:
+        - link "Slang Dictionary":
+          - /url: /slang
+      - listitem:
+        - link "Slang Decoder FAQ":
+          - /url: /slang/faq
+      - listitem:
+        - link "Accessibility":
+          - /url: /accessibility
+      - listitem:
+        - link "Terms":
+          - /url: /terms
+      - listitem:
+        - link "Privacy":
+          - /url: /privacy
+  - link "jarrod@jandhtechnology.com":
+    - /url: mailto:jarrod@jandhtechnology.com
+  - paragraph: Copyright © 2026 J&H Technology LLC — All Rights Reserved
+- alert

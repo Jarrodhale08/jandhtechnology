@@ -31,7 +31,7 @@ import {
   SLANG_INDEX_URL,
   termFaqItems,
 } from "@/lib/slang-jsonld";
-import { slangMetadata } from "@/lib/slang-metadata";
+import { NOT_FOUND_METADATA, slangMetadata } from "@/lib/slang-metadata";
 
 export const revalidate = 86400;
 
@@ -49,7 +49,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps<"/slang/[term]">): Promise<Metadata> {
   const term = await getTermBySlug((await params).term);
-  if (!term) return {};
+  if (!term) return NOT_FOUND_METADATA;
   const generation = term.generation === "gen-alpha" ? "Gen Alpha" : "Gen Z";
   return slangMetadata({
     title: `What does ${displayTerm(term.term)} mean? ${generation} slang | ${APP_NAME}`,

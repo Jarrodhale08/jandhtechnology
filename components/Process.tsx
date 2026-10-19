@@ -61,7 +61,7 @@ export default function Process() {
               key={step.number}
               className="card-hover p-6 rounded-2xl bg-white/[0.03] border border-white/[0.06] hover:border-indigo-500/30 relative"
             >
-              <div className="text-5xl font-bold text-indigo-500/20 mb-4 font-mono">
+              <div className="text-5xl font-bold text-indigo-400 mb-4 font-mono">
                 {step.number}
               </div>
               <h3 className="text-lg font-semibold text-white mb-2">{step.title}</h3>
