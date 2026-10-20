@@ -12,6 +12,7 @@ const FOOTER_LINKS = [
   { href: "/accessibility", label: "Accessibility" },
   { href: "/terms", label: "Terms" },
   { href: "/privacy", label: "Privacy" },
+  { href: "/support", label: "Support" },
 ];
 
 const LINK = "inline-flex min-h-6 items-center hover:text-white underline-offset-2 hover:underline transition-colors";
