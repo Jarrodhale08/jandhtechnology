@@ -9,6 +9,7 @@ const PAGES: LlmsLink[] = [
   { title: "New slang this month", path: "/slang/new-this-month", note: "the latest additions" },
   { title: "Slang safety guide for parents", path: "/slang/safety-guide", note: "ratings, warning signs, conversation starters, and crisis lines" },
   { title: "Slang Decoder FAQ", path: "/slang/faq", note: "pricing, privacy, safety, generations, and talking with kids" },
+  { title: "Support", path: "/support", note: "contact, subscription management, restoring purchases, and account deletion" },
   { title: "How Slang Decoder works", path: "/slang/how-it-works", note: "what the app does" },
   { title: "About Slang Decoder", path: "/slang/about", note: "who curates the terms and editorial standards" },
   { title: "Who is Gen Z?", path: "/slang/gen-z", note: "birth years and where Gen Z slang comes from" },

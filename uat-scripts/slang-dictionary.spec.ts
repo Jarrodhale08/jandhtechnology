@@ -24,7 +24,7 @@ const NEW_PAGES: [string, string][] = [
   ["/accessibility", "Accessibility Statement"],
 ];
 
-const OTHER_PAGES = ["/", "/privacy", "/terms", "/coffee-tasting/privacy", "/coffee-tasting/terms", "/coffee-tasting/support", "/coffee-tasting/delete-account"];
+const OTHER_PAGES = ["/", "/privacy", "/terms", "/support", "/coffee-tasting/privacy", "/coffee-tasting/terms", "/coffee-tasting/support", "/coffee-tasting/delete-account"];
 
 async function jsonLd(page: Page): Promise<Record<string, unknown>[]> {
   const raw = await page.locator('script[type="application/ld+json"]').allTextContents();
