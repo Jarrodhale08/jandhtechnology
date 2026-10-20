@@ -20,7 +20,7 @@ export const revalidate = 86400;
 export const metadata = slangMetadata({
   title: `Gen Z & Gen Alpha Slang Dictionary A–Z | ${APP_NAME}`,
   description:
-    "Browse 1,000+ Gen Z and Gen Alpha slang terms with the generation and a parent safety rating for each. Get every meaning in the Slang Decoder iPhone app.",
+    "Browse 600+ Gen Z and Gen Alpha slang terms with the generation and a parent safety rating for each. Get every meaning in the Slang Decoder iPhone app.",
   path: "/slang",
   markdownPath: "/slang.md",
 });
