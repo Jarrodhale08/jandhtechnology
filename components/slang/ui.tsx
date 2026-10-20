@@ -153,7 +153,7 @@ export function AppStoreCta({
       </h2>
       {children ?? (
         <p className="text-[#d4d4dc] leading-relaxed mb-6 max-w-2xl">
-          {APP_NAME} for iPhone explains 600+ Gen Z and Gen Alpha slang terms with a plain-English
+          {APP_NAME} for iPhone explains 1,000+ Gen Z and Gen Alpha slang terms with a plain-English
           meaning, a real example, and a parent safety rating. Free to download, with an optional
           Premium subscription ($2.99/month or $19.99/year, 7-day free trial).
         </p>
