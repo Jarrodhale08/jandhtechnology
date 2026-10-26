@@ -4,8 +4,8 @@ import Footer from "@/components/Footer";
 import { LegalHeader, LegalSection, LegalList, LegalP } from "@/components/legal";
 import { CoffeeTastingRelatedLinks } from "@/components/coffee-tasting/RelatedLinks";
 
-const LAST_UPDATED = "October 18, 2026";
-const EFFECTIVE_DATE = "October 18, 2026";
+const LAST_UPDATED = "October 26, 2026";
+const EFFECTIVE_DATE = "October 26, 2026";
 const LINK = "text-indigo-300 hover:text-indigo-200 underline underline-offset-2";
 const DESCRIPTION =
   "How to delete your Coffee Tasting account and data, what is deleted, and how to ask us to delete crash reports.";
@@ -38,10 +38,10 @@ export default function CoffeeTastingDeleteAccountPage() {
 
           <LegalSection id="accounts" number="1" title="Accounts">
             <LegalP>
-              The current version of Coffee Tasting, by J&amp;H Technology LLC, does not have user
-              accounts. There is no account to delete, and your tastings are not stored on our
-              servers. When accounts are added, this page and the app&rsquo;s Settings will let you
-              delete your account and its data.
+              Coffee Tasting, by J&amp;H Technology LLC, has no sign-up, and your tastings are not
+              stored on our servers. If you subscribe to Premium, the app creates an anonymous
+              account that holds only a random identifier and your purchase record (plan, status,
+              and period end). Deleting your data in the app deletes that account and record too.
             </LegalP>
           </LegalSection>
 
@@ -52,7 +52,14 @@ export default function CoffeeTastingDeleteAccountPage() {
             </LegalList>
             <LegalP>
               This permanently erases every tasting, coffee, note and setting on your device straight
-              away. Uninstalling the app also removes all of its data.
+              away, and deletes your anonymous account and purchase records from our server. If the
+              app cannot reach the server, your device data is still erased and the app asks you to
+              try again from Settings. Uninstalling the app also removes all of its data from your
+              device.
+            </LegalP>
+            <LegalP>
+              Deleting your data does not cancel a subscription. Cancel it first in your App Store
+              or Google Play subscription settings, otherwise the store keeps billing you.
             </LegalP>
           </LegalSection>
 
