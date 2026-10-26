@@ -11,12 +11,12 @@ const LINK = "text-indigo-300 hover:text-indigo-200 underline underline-offset-2
 export const metadata: Metadata = {
   title: "Privacy Policy | Coffee Tasting | J&H Technology",
   description:
-    "How the Coffee Tasting app handles your data: tastings stay on your device, Premium uses an anonymous account, crash reports are opt-in, and there are no ads or tracking.",
+    "How the Coffee Tasting app handles your data: tastings stay on your device, the app uses an anonymous account, crash reports are opt-in, and there are no ads or tracking.",
   alternates: { canonical: "https://www.jandhtechnology.com/coffee-tasting/privacy" },
   openGraph: {
     title: "Privacy Policy | Coffee Tasting | J&H Technology",
     description:
-      "How the Coffee Tasting app handles your data: tastings stay on your device, Premium uses an anonymous account, crash reports are opt-in, and there are no ads or tracking.",
+      "How the Coffee Tasting app handles your data: tastings stay on your device, the app uses an anonymous account, crash reports are opt-in, and there are no ads or tracking.",
     url: "https://www.jandhtechnology.com/coffee-tasting/privacy",
     siteName: "J&H Technology",
     type: "article",
@@ -48,8 +48,8 @@ export default function CoffeeTastingPrivacyPage() {
           <LegalSection id="summary" number="1" title="Summary">
             <LegalP>
               Coffee Tasting is a notebook for your coffee tastings. Your tastings never leave your
-              phone. There is no sign-up and no email or name to give us. If you subscribe to
-              Premium, the app uses an anonymous account so we can confirm your subscription. We
+              phone. There is no sign-up and no email or name to give us. The app creates an
+              anonymous account on first launch so it can check your Premium status. We
               have no ads and no tracking. The app checks for app updates when it opens, and sends
               crash reports only if you switch that on.
             </LegalP>
@@ -111,9 +111,9 @@ export default function CoffeeTastingPrivacyPage() {
           <LegalSection id="premium-account" number="4" title="Premium and your anonymous account">
             <LegalP>
               Coffee Tasting Premium is an auto-renewing subscription sold through the Apple App
-              Store or Google Play. You do not create a login. The first time the app needs to
-              check or verify a subscription, it creates an anonymous account on our server
-              (hosted by Supabase). The account is a random identifier with no name, email
+              Store or Google Play. You do not create a login. The first time you open the app, it creates an
+              anonymous account on our server (hosted by Supabase) so it can check whether you have
+              Premium. Every install has one, whether or not you subscribe. The account is a random identifier with no name, email
               address, phone number, or password attached.
             </LegalP>
             <LegalSubSection number="4.1" title="Purchase records">
@@ -137,6 +137,11 @@ export default function CoffeeTastingPrivacyPage() {
                 unlock Premium, keep it in step with the store, and handle refunds. The anonymous
                 identifier and purchase record are not linked to your name or email, and we do not
                 use them for advertising or tracking.
+              </LegalP>
+              <LegalP>
+                When an anonymous account is deleted, we keep pseudonymous purchase event logs
+                (store transaction identifiers and event types, with no personal information and no
+                link to an account) for refund and fraud handling.
               </LegalP>
             </LegalSubSection>
             <LegalSubSection number="4.2" title="Service providers">
@@ -174,8 +179,9 @@ export default function CoffeeTastingPrivacyPage() {
             <LegalP>
               Open Settings and choose <strong className="text-white">Delete all my data</strong>{" "}
               to erase every tasting and setting from the app. The app also asks our server to
-              delete your anonymous account and purchase records, and then signs the account out of
-              the device. If the app cannot reach the server, it still erases the data on your
+              delete your anonymous account and subscription records, and then signs the account out
+              of the device. The app does not create a new account at that moment; it creates a
+              fresh anonymous account the next time you open it. If the app cannot reach the server, it still erases the data on your
               device and tells you to try again from Settings. Uninstalling the app also removes
               its data from your device. A crash report already sent cannot be linked back to you,
               so it cannot be looked up or removed individually.

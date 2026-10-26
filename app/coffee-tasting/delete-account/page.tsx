@@ -39,9 +39,12 @@ export default function CoffeeTastingDeleteAccountPage() {
           <LegalSection id="accounts" number="1" title="Accounts">
             <LegalP>
               Coffee Tasting, by J&amp;H Technology LLC, has no sign-up, and your tastings are not
-              stored on our servers. If you subscribe to Premium, the app creates an anonymous
-              account that holds only a random identifier and your purchase record (plan, status,
-              and period end). Deleting your data in the app deletes that account and record too.
+              stored on our servers. The app creates an anonymous account on first launch so it
+              can check your Premium status. It holds only a random identifier and, if you
+              subscribe, your subscription record (plan, status, and period end). Deleting your
+              data in the app deletes that account and record. Pseudonymous purchase event logs
+              (transaction identifiers, no personal information) are kept for refund and fraud
+              handling, and the next time you open the app it creates a fresh anonymous account.
             </LegalP>
           </LegalSection>
 
