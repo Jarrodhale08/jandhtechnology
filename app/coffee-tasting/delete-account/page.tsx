@@ -57,8 +57,12 @@ export default function CoffeeTastingDeleteAccountPage() {
               This permanently erases every tasting, coffee, note and setting on your device straight
               away, and deletes your anonymous account and purchase records from our server. If the
               app cannot reach the server, your device data is still erased and the app asks you to
-              try again from Settings. Uninstalling the app also removes all of its data from your
-              device.
+              try again from Settings. If you use Premium on more than one device, the shared
+              subscription record stays on our server until every device using it has deleted its
+              data. Uninstalling the app removes your tastings, coffees, notes and settings from the
+              device. On iPhone and iPad, the anonymous sign-in and the saved Premium status are kept
+              in the device keychain and can survive an uninstall; use Delete all my data first to
+              remove them.
             </LegalP>
             <LegalP>
               Deleting your data does not cancel a subscription. Cancel it first in your App Store

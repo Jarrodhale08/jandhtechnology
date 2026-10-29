@@ -182,8 +182,12 @@ export default function CoffeeTastingPrivacyPage() {
               delete your anonymous account and subscription records, and then signs the account out
               of the device. The app does not create a new account at that moment; it creates a
               fresh anonymous account the next time you open it. If the app cannot reach the server, it still erases the data on your
-              device and tells you to try again from Settings. Uninstalling the app also removes
-              its data from your device. A crash report already sent cannot be linked back to you,
+              device and tells you to try again from Settings. If you use Premium on more than one
+              device, the shared subscription record stays until every device using it has deleted
+              its data. Uninstalling the app removes your tastings and settings from the device. On
+              iPhone and iPad, the anonymous sign-in and the saved Premium status are kept in the
+              device keychain and can survive an uninstall; use Delete all my data first to remove
+              them. A crash report already sent cannot be linked back to you,
               so it cannot be looked up or removed individually.
             </LegalP>
             <LegalP>
