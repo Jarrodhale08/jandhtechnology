@@ -19,6 +19,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/coffee-tasting/terms",
     "/coffee-tasting/support",
     "/coffee-tasting/delete-account",
+    "/craving-crush/privacy",
+    "/craving-crush/terms",
+    "/craving-crush/support",
+    "/craving-crush/delete-account",
   ].map((path) => ({
     url: `${SITE_URL}${path}`,
     lastModified: revised,
