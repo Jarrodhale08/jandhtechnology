@@ -13,6 +13,8 @@ const TEMPLATES: [string, string][] = [
   ["Legal (terms)", "/terms"],
   ["Coffee Tasting support", "/coffee-tasting/support"],
   ["Coffee Tasting delete account", "/coffee-tasting/delete-account"],
+  ["Craving Crush privacy", "/craving-crush/privacy"],
+  ["Craving Crush delete account", "/craving-crush/delete-account"],
   ["Accessibility statement", "/accessibility"],
   ["Slang index", "/slang"],
   ["Term page", "/slang/rizz"],

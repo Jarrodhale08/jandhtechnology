@@ -122,6 +122,12 @@ export default function SupportPage() {
                 </Link>{" "}
                 for help with the Coffee Tasting app
               </li>
+              <li>
+                <Link className={LINK} href="/craving-crush/support">
+                  Craving Crush support
+                </Link>{" "}
+                for help with the Craving Crush app
+              </li>
             </LegalList>
           </LegalSection>
         </article>
