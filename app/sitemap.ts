@@ -23,6 +23,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/craving-crush/terms",
     "/craving-crush/support",
     "/craving-crush/delete-account",
+    "/repairradar/delete-account",
   ].map((path) => ({
     url: `${SITE_URL}${path}`,
     lastModified: revised,
