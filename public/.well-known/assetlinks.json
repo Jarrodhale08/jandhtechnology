@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.jarrodhale.coffeetasting",
+      "sha256_cert_fingerprints": [
+        "DB:26:D4:08:DC:3D:24:AF:C7:B8:69:4B:08:73:7B:43:6B:C3:11:E9:FA:73:78:A2:9E:C9:CB:3B:0B:CB:4C:89"
+      ]
+    }
+  }
+]

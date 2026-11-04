@@ -4,8 +4,8 @@ import Footer from "@/components/Footer";
 import { LegalHeader, LegalSection, LegalSubSection, LegalP } from "@/components/legal";
 import { CoffeeTastingRelatedLinks } from "@/components/coffee-tasting/RelatedLinks";
 
-const LAST_UPDATED = "October 18, 2026";
-const EFFECTIVE_DATE = "October 18, 2026";
+const LAST_UPDATED = "November 4, 2026";
+const EFFECTIVE_DATE = "November 4, 2026";
 const LINK = "text-indigo-300 hover:text-indigo-200 underline underline-offset-2";
 
 export const metadata: Metadata = {
@@ -50,18 +50,40 @@ export default function CoffeeTastingSupportPage() {
           <LegalSection id="faq" number="2" title="Frequently asked questions">
             <LegalSubSection number="Q" title="Where are my tastings stored?">
               <LegalP>
-                Only on your device. We have no accounts and no servers holding your tastings, so we
-                cannot recover them if you delete the app or lose your phone. See the{" "}
+                On your device. If you sign in and turn on backup in Settings, a copy is also kept in your
+                account so it follows you to a new phone; turning backup off deletes that copy. Without backup
+                we cannot recover tastings if you delete the app or lose your phone. See the{" "}
                 <a className={LINK} href="/coffee-tasting/privacy">
                   privacy policy
                 </a>
                 .
               </LegalP>
             </LegalSubSection>
-            <LegalSubSection number="Q" title="How do I delete everything?">
+            <LegalSubSection number="Q" title="How do I join a group tasting?">
               <LegalP>
-                Open Settings and tap Delete all my data, then confirm. This erases every tasting
-                and setting and cannot be undone. Uninstalling the app also removes its data.
+                Open the Groups tab, choose Join with code, and enter the six-character code from your host, or
+                open the link they sent you. You don&rsquo;t need an account or a subscription to join.
+              </LegalP>
+            </LegalSubSection>
+            <LegalSubSection number="Q" title="How do I report or block someone in a group tasting?">
+              <LegalP>
+                In the session, open People, or tap a name on the Wall, and choose Report or Block. Blocking
+                hides that person&rsquo;s notes from you at once; you can unblock in Settings, under Blocked
+                people. We review every report within 24 hours and remove content or suspend or ban users who
+                break our{" "}
+                <a className={LINK} href="/coffee-tasting/terms">
+                  terms
+                </a>
+                .
+              </LegalP>
+            </LegalSubSection>
+            <LegalSubSection number="Q" title="How do I delete my account?">
+              <LegalP>
+                Open Settings, then Account, and choose Delete account. See{" "}
+                <a className={LINK} href="/coffee-tasting/delete-account">
+                  Delete account
+                </a>
+                . To erase only what is on your device, use Delete all my data in Settings.
               </LegalP>
             </LegalSubSection>
             <LegalSubSection number="Q" title="How do I see the introduction again?">

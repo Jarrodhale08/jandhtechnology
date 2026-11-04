@@ -28,7 +28,12 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   async headers() {
-    return [{ source: "/(.*)", headers: securityHeaders }];
+    return [
+      { source: "/(.*)", headers: securityHeaders },
+      // Universal and App Links files must come back as JSON with no redirect, or the platforms reject them.
+      { source: "/.well-known/apple-app-site-association", headers: [{ key: "Content-Type", value: "application/json" }] },
+      { source: "/.well-known/assetlinks.json", headers: [{ key: "Content-Type", value: "application/json" }] },
+    ];
   },
   async redirects() {
     return [{ source: "/slang/for-parents", destination: "/slang/safety-guide", permanent: true }];

@@ -4,8 +4,8 @@ import Footer from "@/components/Footer";
 import { LegalHeader, LegalSection, LegalList, LegalP } from "@/components/legal";
 import { CoffeeTastingRelatedLinks } from "@/components/coffee-tasting/RelatedLinks";
 
-const LAST_UPDATED = "October 18, 2026";
-const EFFECTIVE_DATE = "October 18, 2026";
+const LAST_UPDATED = "November 4, 2026";
+const EFFECTIVE_DATE = "November 4, 2026";
 const LINK = "text-indigo-300 hover:text-indigo-200 underline underline-offset-2";
 
 const FLAVOR_ATTRIBUTION =
@@ -66,15 +66,81 @@ export default function CoffeeTastingTermsPage() {
             </LegalP>
           </LegalSection>
 
-          <LegalSection id="your-content" number="2" title="Your content stays yours">
+          <LegalSection id="accounts" number="2" title="Accounts and sign-in">
             <LegalP>
-              The tastings, ratings, and notes you write belong to you. They are stored only on
-              your device, and we do not receive, claim, or license them. You are responsible for
-              keeping your own backups.
+              You can use the app without signing in. The app creates an anonymous guest identifier
+              so that purchases and group sessions can work. You can sign in with Apple or with an
+              email code to keep your data if you change phones. You are responsible for your
+              account and for what happens under it. You can delete it at any time from Settings
+              (see{" "}
+              <a className={LINK} href="/coffee-tasting/delete-account">
+                Delete account
+              </a>
+              ).
             </LegalP>
           </LegalSection>
 
-          <LegalSection id="coffee-wheels" number="3" title="Coffee wheels">
+          <LegalSection id="your-content" number="3" title="Your content stays yours">
+            <LegalP>
+              The tastings, ratings, and notes you write belong to you. By default they are stored
+              only on your device. If you turn on backup, or you take part in a group tasting, the
+              content involved is also stored on our servers as described in the{" "}
+              <a className={LINK} href="/coffee-tasting/privacy">
+                privacy policy
+              </a>
+              . You give us a limited license to store and display that content for the purpose of
+              running those features: backup shows it to you on your devices, and a group tasting
+              shows what you enter to the other people in that session. We do not claim ownership
+              of it and do not use it for anything else.
+            </LegalP>
+          </LegalSection>
+
+          <LegalSection id="group-tastings" number="4" title="Group tastings">
+            <LegalP>
+              A group tasting has a leader, who creates the session, names the coffees, optionally
+              enters what the coffees are, and decides when the group&rsquo;s notes are shown.
+              Hosting a group tasting needs a Coffee Tasting account and an active Premium
+              subscription. Joining one with a session code needs neither.
+            </LegalP>
+            <LegalP>
+              Everyone in a session can see the display name you chose, and your notes for a coffee
+              become visible to the rest of the group when the leader opens the Wall for that coffee.
+              Session titles, coffee names, display names and notes are visible to the people in the
+              session. Leaders are responsible for the content they add and for the links they
+              share. Sessions that stay idle for 72 hours are closed automatically.
+            </LegalP>
+          </LegalSection>
+
+          <LegalSection id="acceptable-use" number="5" title="Acceptable use, zero tolerance">
+            <LegalP>
+              Do not post anything objectionable, abusive, hateful, sexually explicit, harassing,
+              infringing, or illegal in session titles, display names, coffee names, notes, or
+              links. Do not impersonate anyone, send spam, or share unsolicited links.
+            </LegalP>
+            <LegalP emphasis>
+              WE HAVE NO TOLERANCE FOR OBJECTIONABLE CONTENT OR ABUSIVE USERS. VIOLATIONS LEAD TO
+              REMOVAL OF CONTENT AND SUSPENSION OR A PERMANENT BAN, WITHOUT REFUND.
+            </LegalP>
+            <LegalP>
+              The app filters objectionable text before it is shared, but filters are not perfect.
+              If you see something that breaks these rules, use Report on a person or their notes in
+              the session. You can also Block a person, which hides their content from you straight
+              away, and unblock them later in Settings. We review every report within 24 hours and
+              act on it, including removing content and suspending or banning users. You must accept
+              these terms before you host or join a group tasting.
+            </LegalP>
+          </LegalSection>
+
+          <LegalSection id="premium" number="6" title="Premium subscriptions">
+            <LegalP>
+              Premium is an auto-renewing subscription sold through the App Store or Google Play,
+              which handle billing, renewal, cancellation, and refunds under their own terms. Manage
+              or cancel it in your App Store or Google Play account settings. Deleting your Coffee
+              Tasting account does not cancel a subscription.
+            </LegalP>
+          </LegalSection>
+
+          <LegalSection id="coffee-wheels" number="7" title="Coffee wheels">
             <LegalP>
               The app&rsquo;s flavor and character vocabularies draw on published coffee wheels. We
               credit them as follows.
@@ -88,16 +154,16 @@ export default function CoffeeTastingTermsPage() {
             </LegalP>
           </LegalSection>
 
-          <LegalSection id="retailer-links" number="4" title="Retailer links are third-party">
+          <LegalSection id="retailer-links" number="8" title="Retailer links are third-party">
             <LegalP>
-              The app&rsquo;s &ldquo;Buy this coffee&rdquo; links show the retailer&rsquo;s web address and
-              open it in your browser. These are third-party websites that we do not own or control. We
+              The app&rsquo;s &ldquo;Buy&rdquo; links, including links a group leader adds, show the retailer&rsquo;s web address
+              and open it in your browser. These are third-party websites that we do not own or control. We
               take no payment from these links and are not responsible for the retailers&rsquo;
               products, prices, content, or policies. Any purchase is between you and the retailer.
             </LegalP>
           </LegalSection>
 
-          <LegalSection id="warranty" number="5" title="No warranty, and limitation of liability">
+          <LegalSection id="warranty" number="9" title="No warranty, and limitation of liability">
             <LegalP emphasis>
               THE APP IS PROVIDED &ldquo;AS IS&rdquo; AND &ldquo;AS AVAILABLE&rdquo;, WITHOUT
               WARRANTIES OF ANY KIND, TO THE FULLEST EXTENT PERMITTED BY LAW.
@@ -105,7 +171,7 @@ export default function CoffeeTastingTermsPage() {
             <LegalP>
               To the fullest extent permitted by law, we are not liable for indirect, incidental,
               special, or consequential damages, or for lost data, arising from your use of the app.
-              Because your tastings live only on your device, you may lose them if you delete the
+              If you do not turn on backup, your tastings live only on your device, and you may lose them if you delete the
               app, lose the device, or use Delete all my data. Our total liability for any claim
               relating to the app is limited to the amount you paid for it, which for a free app
               is zero. Some places do not allow these limits, and in that case they apply only as
@@ -113,14 +179,22 @@ export default function CoffeeTastingTermsPage() {
             </LegalP>
           </LegalSection>
 
-          <LegalSection id="governing-law" number="6" title="Governing law">
+          <LegalSection id="governing-law" number="10" title="Governing law">
             <LegalP>
               These terms are governed by the laws of the State of Michigan, United States,
               without regard to conflict of law principles.
             </LegalP>
           </LegalSection>
 
-          <LegalSection id="contact" number="7" title="Contact">
+          <LegalSection id="changes" number="11" title="Changes to these terms">
+            <LegalP>
+              If we change these terms in a way that matters, we will update this page and ask you to
+              accept the new version in the app before you host or join a group tasting again. This is
+              version 1 of the group terms.
+            </LegalP>
+          </LegalSection>
+
+          <LegalSection id="contact" number="12" title="Contact">
             <LegalList>
               <li>J&amp;H Technology LLC</li>
               <li>

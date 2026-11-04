@@ -1,0 +1,10 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["JC38W9DS2S.com.jarrodhale.coffeetasting"],
+        "components": [{ "/": "/coffee-tasting/join/*" }]
+      }
+    ]
+  }
+}
