@@ -28,7 +28,7 @@ export type PortfolioApp = {
   androidStatus: "live" | "coming-soon" | "none";
   platforms: string[];
   contentRating?: string;
-  website?: { url: string; label: string; launching?: boolean };
+  website?: { url: string; label: string };
   webApp?: { url: string; label: string };
   privacyUrl: string;
   termsUrl: string;
@@ -518,7 +518,7 @@ export const APPS: PortfolioApp[] = [
     playPackage: "com.jarrodhale.coffeetasting",
     androidStatus: "live",
     platforms: ["Android"],
-    website: { url: "https://coffeetasting.app", label: "coffeetasting.app", launching: true },
+    website: { url: "https://coffeetasting.app", label: "coffeetasting.app" },
     privacyUrl: site("/coffee-tasting/privacy"),
     termsUrl: site("/coffee-tasting/terms"),
     supportUrl: site("/coffee-tasting/support"),
@@ -581,12 +581,7 @@ export function storeLinks(app: PortfolioApp): OfficialLink[] {
 
 export function officialLinks(app: PortfolioApp): OfficialLink[] {
   const links = storeLinks(app);
-  if (app.website)
-    links.push({
-      kind: "website",
-      label: app.website.launching ? `Official website: ${app.website.label} (launching soon)` : `Official website: ${app.website.label}`,
-      url: app.website.url,
-    });
+  if (app.website) links.push({ kind: "website", label: `Official website: ${app.website.label}`, url: app.website.url });
   if (app.webApp) links.push({ kind: "web-app", label: `Web app: ${app.webApp.label}`, url: app.webApp.url });
   if (!app.hasOwnPage) links.push({ kind: "hub", label: `${app.name} on jandhtechnology.com`, url: pageUrl(app) });
   links.push({ kind: "privacy", label: "Privacy policy", url: app.privacyUrl });
@@ -596,11 +591,11 @@ export function officialLinks(app: PortfolioApp): OfficialLink[] {
   return links;
 }
 
-// Entity links for sameAs: store listings and the app's own live site. Legal pages and a site that is
-// still a holding page are not identities of the app, so they are left out.
+// Entity links for sameAs: store listings and the app's own site. Legal pages are not identities of the
+// app, so they are left out.
 export function sameAsUrls(app: PortfolioApp): string[] {
   const urls = storeLinks(app).map((l) => l.url);
-  if (app.website && !app.website.launching) urls.push(app.website.url);
+  if (app.website) urls.push(app.website.url);
   if (app.webApp) urls.push(app.webApp.url);
   return urls;
 }

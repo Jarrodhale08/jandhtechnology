@@ -222,7 +222,7 @@ test.describe("slang funnel", () => {
     expect(llmsText).toContain(`${SITE}/slang/faq.md`);
 
     const fullText = await (await request.get(`${BASE}/llms-full.txt`)).text();
-    expect(fullText).toMatch(/^- Rizz \| Gen Z \| Safe \| TikTok \| https:\/\/www\.jandhtechnology\.com\/slang\/rizz$/m);
+    expect(fullText).toMatch(/^- Rizz \| Gen Z & Gen Alpha \| Safe \| TikTok \| https:\/\/www\.jandhtechnology\.com\/slang\/rizz$/m);
 
     for (const path of ["/slang.md", "/slang/rizz.md", "/slang/faq.md", "/slang/about.md", "/slang/safety-guide.md"]) {
       const res = await request.get(`${BASE}${path}`);

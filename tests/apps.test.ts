@@ -75,17 +75,24 @@ test("official links: every app has privacy, terms and support; all https; no du
   assert.ok(rr.some((l) => l.url === `${SITE}/repairradar/delete-account`));
   assert.ok(!rr.some((l) => l.url.includes("repairradar.app")), "repairradar.app is a holding page");
   assert.ok(officialLinks(getApp("slang-decoder")).some((l) => l.kind === "hub" && l.url === `${SITE}/slang`));
-  assert.ok(officialLinks(getApp("coffee-tasting")).some((l) => l.kind === "website" && /launching soon/.test(l.label)));
+  assert.ok(
+    officialLinks(getApp("coffee-tasting")).some(
+      (l) => l.kind === "website" && l.url === "https://coffeetasting.app" && l.label === "Official website: coffeetasting.app",
+    ),
+  );
 });
 
-test("sameAs: store listings and live sites only, never legal pages or holding pages", () => {
+test("sameAs: store listings and official sites only, never legal pages", () => {
   for (const a of APPS) {
     for (const u of sameAsUrls(a)) {
       assert.ok(!/privacy|terms|support|delete-account|help/.test(u), `${a.slug} ${u}`);
       assert.match(u, /^https:\/\//);
     }
   }
-  assert.deepEqual(sameAsUrls(getApp("coffee-tasting")), ["https://play.google.com/store/apps/details?id=com.jarrodhale.coffeetasting"]);
+  assert.deepEqual(sameAsUrls(getApp("coffee-tasting")), [
+    "https://play.google.com/store/apps/details?id=com.jarrodhale.coffeetasting",
+    "https://coffeetasting.app",
+  ]);
   assert.deepEqual(sameAsUrls(getApp("handybook")), ["https://apps.apple.com/app/id6761731339", "https://handymanbook.app"]);
   assert.deepEqual(sameAsUrls(getApp("nannylog")), [
     "https://apps.apple.com/app/id6757959069",
