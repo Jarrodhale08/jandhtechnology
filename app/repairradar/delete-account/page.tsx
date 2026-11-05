@@ -129,7 +129,11 @@ export default function RepairRadarDeleteAccountPage() {
 
           <LegalSection id="more" number="8" title="More information">
             <LegalP>
-              See the{" "}
+              See{" "}
+              <a className={LINK} href="/repairradar">
+                RepairRadar
+              </a>
+              , the{" "}
               <a className={LINK} href="/privacy">
                 privacy policy
               </a>{" "}

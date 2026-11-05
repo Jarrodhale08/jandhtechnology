@@ -13,20 +13,8 @@ type JsonLdNode = Record<string, unknown>;
 
 export const SLANG_INDEX_URL = `${SITE_URL}/slang`;
 const TERM_SET_ID = `${SLANG_INDEX_URL}#defined-term-set`;
-const ORG_ID = `${SITE_URL}/#organization`;
+export const ORG_ID = `${SITE_URL}/#organization`;
 const APP_ID = `${SITE_URL}/#slang-decoder-app`;
-
-export function organizationJsonLd(): JsonLdNode {
-  return {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "@id": ORG_ID,
-    name: "J&H Technology LLC",
-    url: SITE_URL,
-    email: "jarrod@jandhtechnology.com",
-    sameAs: [APP_STORE_URL],
-  };
-}
 
 export function mobileApplicationJsonLd(): JsonLdNode {
   return {

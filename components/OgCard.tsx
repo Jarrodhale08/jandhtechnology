@@ -2,7 +2,17 @@ import { ImageResponse } from "next/og";
 
 export const OG_SIZE = { width: 1200, height: 630 };
 
-export function ogCard({ eyebrow, title, subtitle }: { eyebrow: string; title: string; subtitle: string }) {
+export function ogCard({
+  eyebrow,
+  title,
+  subtitle,
+  footer = ["Slang Decoder for iPhone", "jandhtechnology.com/slang"],
+}: {
+  eyebrow: string;
+  title: string;
+  subtitle: string;
+  footer?: [string, string];
+}) {
   const titleSize = title.length > 28 ? 64 : title.length > 16 ? 84 : 104;
   return new ImageResponse(
     (
@@ -26,8 +36,8 @@ export function ogCard({ eyebrow, title, subtitle }: { eyebrow: string; title: s
           <div style={{ display: "flex", marginTop: 28, fontSize: 40, color: "#e0e7ff" }}>{subtitle}</div>
         </div>
         <div style={{ display: "flex", justifyContent: "space-between", fontSize: 28, color: "#c7d2fe" }}>
-          <span>Slang Decoder for iPhone</span>
-          <span>jandhtechnology.com/slang</span>
+          <span>{footer[0]}</span>
+          <span>{footer[1]}</span>
         </div>
       </div>
     ),
