@@ -3,7 +3,9 @@ import { AppStoreBadge } from "@/components/slang/ui";
 
 const FOOTER_LINKS = [
   { href: "/#services", label: "Services" },
-  { href: "/#apps", label: "Apps" },
+  { href: "/apps", label: "Apps" },
+  { href: "/repairradar", label: "RepairRadar" },
+  { href: "/repairradar/guides", label: "Home Maintenance Guides" },
   { href: "/#process", label: "Process" },
   { href: "/#about", label: "About" },
   { href: "/#contact", label: "Contact" },

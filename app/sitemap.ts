@@ -2,6 +2,8 @@ import type { MetadataRoute } from "next";
 import { groupByLetter, latestUpdate, letterSlug, pageUpdated, PAGES_REVISED_AT } from "@/lib/slang-core";
 import { SITE_URL, getAllTerms, getCategories, termUrl } from "@/lib/slang";
 import { CONTENT_PAGES } from "@/lib/slang-pages";
+import { FACTS_CHECKED_AT, PAGE_APPS } from "@/lib/apps";
+import { GUIDES, guidePath } from "@/lib/repairradar";
 
 export const revalidate = 86400;
 
@@ -29,6 +31,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: revised,
     changeFrequency: path === "/" ? "monthly" : "yearly",
     priority: path === "/" ? 1 : 0.3,
+  }));
+  const appPages: MetadataRoute.Sitemap = ["/apps", ...PAGE_APPS.map((a) => a.path), "/repairradar/guides"].map((path) => ({
+    url: `${SITE_URL}${path}`,
+    lastModified: new Date(FACTS_CHECKED_AT),
+    changeFrequency: "monthly",
+    priority: path === "/apps" || path === "/repairradar" ? 0.9 : 0.8,
+  }));
+  const repairGuides: MetadataRoute.Sitemap = GUIDES.map((g) => ({
+    url: `${SITE_URL}${guidePath(g.slug)}`,
+    lastModified: new Date(g.dateModified),
+    changeFrequency: "yearly",
+    priority: 0.7,
   }));
   const hubs: MetadataRoute.Sitemap = ["/slang", "/slang/trending", "/slang/new-this-month", "/slang/glossary-categories"].map(
     (path) => ({
@@ -62,5 +76,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     changeFrequency: "monthly",
     priority: 0.7,
   }));
-  return [...staticPages, ...hubs, ...guides, ...letterPages, ...categoryPages, ...termPages];
+  return [...staticPages, ...appPages, ...repairGuides, ...hubs, ...guides, ...letterPages, ...categoryPages, ...termPages];
 }

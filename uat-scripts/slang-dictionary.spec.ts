@@ -47,7 +47,10 @@ async function expectSiteWideAppFunnel(page: Page) {
   const nodes = await jsonLd(page);
   expect(types(nodes)).toEqual(expect.arrayContaining(["Organization", "MobileApplication"]));
   const org = nodes.find((n) => n["@type"] === "Organization")!;
-  expect(org.sameAs).toEqual([APP_STORE]);
+  expect(org.sameAs).toEqual([
+    "https://apps.apple.com/developer/id1865047154",
+    "https://play.google.com/store/apps/developer?id=J%26H+Technology",
+  ]);
   const app = nodes.find((n) => n["@type"] === "MobileApplication")!;
   expect(app.operatingSystem).toBe("iOS");
   expect(app.aggregateRating).toBeUndefined();
@@ -213,13 +216,13 @@ test.describe("slang funnel", () => {
     const llms = await request.get(`${BASE}/llms.txt`);
     expect(llms.headers()["content-type"]).toContain("text/plain");
     const llmsText = await llms.text();
-    expect(llmsText).toMatch(/^# Slang Decoder by J&H Technology\n\n> /);
-    expect(llmsText).toContain("## Key pages");
+    expect(llmsText).toMatch(/^# J&H Technology\n\n> /);
+    expect(llmsText).toContain("## Slang Decoder key pages");
     expect(llmsText).toContain(APP_STORE);
     expect(llmsText).toContain(`${SITE}/slang/faq.md`);
 
     const fullText = await (await request.get(`${BASE}/llms-full.txt`)).text();
-    expect(fullText).toMatch(/^- Rizz \| Gen Z \| Safe \| TikTok \| https:\/\/www\.jandhtechnology\.com\/slang\/rizz$/m);
+    expect(fullText).toMatch(/^- Rizz \| Gen Z & Gen Alpha \| Safe \| TikTok \| https:\/\/www\.jandhtechnology\.com\/slang\/rizz$/m);
 
     for (const path of ["/slang.md", "/slang/rizz.md", "/slang/faq.md", "/slang/about.md", "/slang/safety-guide.md"]) {
       const res = await request.get(`${BASE}${path}`);

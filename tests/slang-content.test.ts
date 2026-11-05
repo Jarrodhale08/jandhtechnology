@@ -1,7 +1,8 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { normalizeRows, type SlangRow } from "../lib/slang-core";
-import { faqPageJsonLd, mobileApplicationJsonLd, organizationJsonLd, termFaqItems } from "../lib/slang-jsonld";
+import { organizationJsonLd } from "../lib/apps-jsonld";
+import { faqPageJsonLd, mobileApplicationJsonLd, termFaqItems } from "../lib/slang-jsonld";
 import { llmsFull, llmsIndex } from "../lib/slang-llms";
 import { contentPageMarkdown, termMarkdown } from "../lib/slang-markdown";
 import { absoluteLinks, CONTENT_PAGES, FAQ_PAGE, plainText, splitLinks } from "../lib/slang-pages";
@@ -55,11 +56,14 @@ test("app pitch never calls the app simply free", () => {
   assert.ok(!/free (iPhone )?app/i.test(text));
 });
 
-test("JSON-LD: offers are a free download plus in-app purchases, no ratings, org links the App Store", () => {
+test("JSON-LD: offers are a free download plus in-app purchases, no ratings, org links the developer pages", () => {
   const app = mobileApplicationJsonLd() as { offers: { price: string }[]; aggregateRating?: unknown };
   assert.deepEqual(app.offers.map((o) => o.price), ["0", "2.99", "19.99"]);
   assert.equal(app.aggregateRating, undefined);
-  assert.deepEqual(organizationJsonLd().sameAs, ["https://apps.apple.com/app/id6759603354"]);
+  assert.deepEqual(organizationJsonLd().sameAs, [
+    "https://apps.apple.com/developer/id1865047154",
+    "https://play.google.com/store/apps/developer?id=J%26H+Technology",
+  ]);
   const faq = faqPageJsonLd([{ question: "Q?", answer: "A." }], `${SITE}/x`) as { mainEntity: { acceptedAnswer: { text: string } }[] };
   assert.equal(faq.mainEntity[0].acceptedAnswer.text, "A.");
 });
@@ -77,5 +81,7 @@ test("markdown and llms output link the app and carry only names and labels", ()
   const full = llmsFull(terms);
   assert.match(full, /^- Bet \| Gen Z & Gen Alpha \| Edgy \| Texting \| https:\/\/www\.jandhtechnology\.com\/slang\/bet$/m);
   const index = llmsIndex(terms, ["texting"], [{ title: "FAQ", path: "/slang/faq", note: "n" }], []);
-  assert.match(index, /^# Slang Decoder by J&H Technology\n\n> /);
+  assert.match(index, /^# J&H Technology\n\n> /);
+  assert.match(index, /^## Slang Decoder$/m);
+  assert.match(index, /^- \[RepairRadar\]\(https:\/\/www\.jandhtechnology\.com\/repairradar\): /m);
 });

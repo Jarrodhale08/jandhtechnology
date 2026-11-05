@@ -1,56 +1,6 @@
 import Link from "next/link";
-import { AppStoreBadge } from "@/components/slang/ui";
-
-const apps = [
-  {
-    name: "SplitSmart",
-    category: "Finance",
-    description: "Split bills and track shared expenses with friends, roommates, and travel groups.",
-    color: "from-green-500 to-emerald-600",
-    icon: "💸",
-    tags: ["iOS", "Android"],
-  },
-  {
-    name: "PlantPulse",
-    category: "Home & Garden",
-    description: "Track watering schedules, identify plants, and keep your garden thriving.",
-    color: "from-green-600 to-teal-600",
-    icon: "🌿",
-    tags: ["iOS", "Android"],
-  },
-  {
-    name: "MealPrepPro",
-    category: "Food & Drink",
-    description: "Plan weekly meals, generate shopping lists, and track nutrition with ease.",
-    color: "from-orange-500 to-rose-500",
-    icon: "🥗",
-    tags: ["iOS", "Android"],
-  },
-  {
-    name: "HabitForge",
-    category: "Productivity",
-    description: "Build lasting habits with streak tracking, reminders, and habit insights.",
-    color: "from-purple-500 to-indigo-600",
-    icon: "🔥",
-    tags: ["iOS", "Android"],
-  },
-  {
-    name: "PetPal",
-    category: "Pets",
-    description: "Track pet health, feeding schedules, vet appointments, and cherished memories.",
-    color: "from-pink-500 to-rose-600",
-    icon: "🐾",
-    tags: ["iOS", "Android"],
-  },
-  {
-    name: "GigGuard",
-    category: "Freelance",
-    description: "Track gigs, log expenses, and generate invoices for freelancers and contractors.",
-    color: "from-blue-500 to-indigo-600",
-    icon: "💼",
-    tags: ["iOS", "Android"],
-  },
-];
+import { AppCard } from "@/components/apps/ui";
+import { APPS } from "@/lib/apps";
 
 export default function Apps() {
   return (
@@ -66,61 +16,22 @@ export default function Apps() {
             <span className="gradient-text">Built & Launched</span>
           </h2>
           <p className="text-[#ababab] text-lg max-w-2xl mx-auto">
-            A selection of mobile apps across categories — all built with React Native and
-            shipped to the App Store and Google Play.
+            Apps we build and publish ourselves, on the App Store, Google Play and the web.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div className="card-hover rounded-2xl bg-white/[0.03] border border-indigo-400/40 overflow-hidden md:col-span-2 lg:col-span-3">
-            <div className="p-6 md:p-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-              <div>
-                <h3 className="text-2xl font-semibold text-white">Slang Decoder</h3>
-                <p className="text-sm text-indigo-300 font-medium mb-3">Education · iPhone</p>
-                <p className="text-[#c4c4cc] leading-relaxed max-w-2xl">
-                  Understand Gen Z and Gen Alpha slang, with a parent safety rating on every term. Free to
-                  download, with an optional Premium subscription.{" "}
-                  <Link href="/slang" className="text-indigo-300 hover:text-indigo-200 underline underline-offset-2">
-                    Browse the slang index
-                  </Link>
-                  .
-                </p>
-              </div>
-              <AppStoreBadge className="shrink-0" />
-            </div>
-          </div>
-          {apps.map((app) => (
-            <div
-              key={app.name}
-              className="card-hover rounded-2xl bg-white/[0.03] border border-white/[0.06] hover:border-purple-500/30 overflow-hidden"
-            >
-              <div aria-hidden="true" className={`h-32 bg-gradient-to-br ${app.color} flex items-center justify-center text-5xl`}>
-                {app.icon}
-              </div>
-              <div className="p-5">
-                <div className="flex items-start justify-between mb-2">
-                  <div>
-                    <h3 className="text-lg font-semibold text-white">{app.name}</h3>
-                    <span className="text-xs text-indigo-300 font-medium">{app.category}</span>
-                  </div>
-                  <div className="flex gap-1">
-                    {app.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-xs px-2 py-0.5 rounded-full bg-white/5 border border-white/20 text-[#c4c4cc]"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <p className="text-[#ababab] text-sm leading-relaxed">{app.description}</p>
-              </div>
-            </div>
+        <ul className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {APPS.map((app) => (
+            <AppCard key={app.slug} app={app} headingLevel="h3" />
           ))}
-        </div>
+        </ul>
 
-        <div className="text-center mt-12">
+        <div className="text-center mt-12 space-y-3">
+          <p>
+            <Link href="/apps" className="text-indigo-300 hover:text-indigo-200 underline underline-offset-4">
+              See every app, with store links and support pages
+            </Link>
+          </p>
           <p className="text-[#ababab] text-sm">
             Have an app idea?{" "}
             <a href="#contact" className="text-indigo-300 hover:text-indigo-200 underline underline-offset-4">

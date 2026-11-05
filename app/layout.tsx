@@ -3,7 +3,8 @@ import { Geist } from "next/font/google";
 import "./globals.css";
 import JsonLd from "@/components/JsonLd";
 import { APP_STORE_ID, SITE_URL } from "@/lib/slang";
-import { mobileApplicationJsonLd, organizationJsonLd } from "@/lib/slang-jsonld";
+import { organizationJsonLd } from "@/lib/apps-jsonld";
+import { mobileApplicationJsonLd } from "@/lib/slang-jsonld";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
