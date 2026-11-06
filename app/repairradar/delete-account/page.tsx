@@ -3,7 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { LegalHeader, LegalSection, LegalList, LegalP } from "@/components/legal";
 
-const LAST_UPDATED = "November 2, 2026";
+const LAST_UPDATED = "November 5, 2026";
 const EFFECTIVE_DATE = "November 2, 2026";
 const LINK = "text-indigo-300 hover:text-indigo-200 underline underline-offset-2";
 const EMAIL = "jarrod@jandhtechnology.com";
@@ -75,7 +75,12 @@ export default function RepairRadarDeleteAccountPage() {
             <LegalList>
               <li>
                 Content reports you filed about other users&rsquo; content are kept so we can
-                complete moderation.
+                complete moderation, but they are no longer linked to you.
+              </li>
+              <li>
+                If your sign-in is kept for another J&amp;H Technology app, blocks other people set on
+                you and reports other people filed about you stay in place, including if you come back
+                to RepairRadar.
               </li>
               <li>
                 Purchase records are held by Apple or Google, which process the payment. We do not
